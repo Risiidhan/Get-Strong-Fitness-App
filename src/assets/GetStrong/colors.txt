@@ -1,0 +1,5 @@
+#F2F0ED - lighter grey - more like white
+#BE282E - dark red
+#333333 - dark grey
+#FFFFFF - white
+#E2E2E2 - light grey

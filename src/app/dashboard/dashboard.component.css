@@ -1,0 +1,20 @@
+.scale{
+   text-align: center;
+     
+}
+.formBox{
+   margin-bottom: -20px;
+   margin-top: 5px;
+}
+
+.chart{
+   width: 280px;
+   height: 280px;
+}
+@media screen and (max-width: 302px) {
+   .chart{
+      width: 190px;
+      height: 190px;
+      margin-right: -90px;
+   }
+}

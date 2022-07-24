@@ -1,0 +1,136 @@
+
+<body class="font-inter grid grid-cols-5 max-w-screen-2xl mx-auto ">
+
+<app-sidemenu></app-sidemenu>
+
+
+    <!-- Main -->
+    <div class="col-span-4  ">
+
+           <section class="px-8 py-6">
+
+            <div class="mb-10 bg-white rounded-2xl w-full px-6 py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                Welcome, User
+            </div>
+
+
+
+                <div class="block md:flex md:flex-row justify-between mb-10 pb-3 text-center">
+                    <div class="bg-white rounded-2xl mb-2 px-12 drop-shadow-2xl py-8">
+                        <div class="font-medium">Summary</div>
+                        <div class="text-7xl font-bold text-teal-500 py-3">74</div>
+                        <div class="font-thin text-gray-500 ">Current Weight</div>
+                    </div>
+                    <div class="bg-white rounded-2xl mb-2 px-12 drop-shadow-2xl py-8">
+                        <div class="font-medium">Summary</div>
+                        <div class="text-7xl font-bold text-red-500 py-3 flex flex-row justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
+                              </svg>
+                        </div>
+                        <div class="font-thin text-gray-500">Workout level</div>
+                    </div>
+                    <div class="bg-white rounded-2xl mb-2 px-12 drop-shadow-2xl py-8">
+                        <div class="font-medium">Summary</div>
+                        <div class="text-7xl font-bold text-purple-400 py-3">7400</div>
+                        <div class="font-thin text-gray-500">Calories per day</div>
+                    </div>
+                    <div class="bg-white rounded-2xl  mb-2 px-12 drop-shadow-2xl py-8">
+                        <div class="font-medium">Summary</div>
+                        <div class="text-7xl font-bold text-yellow-400 py-3 flex flex-row justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                                <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
+                              </svg>
+                        </div>
+                        <div class="font-thin text-gray-500">Usefful Tips</div>
+                    </div>
+                </div>
+
+                <div class="text-center text-4xl py-8">Track Your Calories In take</div>
+                <div class="block md:flex md:flex-row  justify-between mb-10 pb-3">
+                    <div class="rounded-2xl basis-1/2 md:basis-1/2">
+                        <div class="mb-10 pt-6 lineChart rounded-2xl w-full px-6 py-4 flex items-center text-gray-800 justify-between ">
+                    
+                            <div class="container py-5">
+                                <div class="row mb-3">
+                                  <div class="col-4 w-50 ">
+                                    <canvas class="chart" id="doughnut_chart"></canvas>
+                                  </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl ml-2 basis-1/2 md:basis-1/2 text-black-600 bg-white px-12 py-8">
+                        <div class=" block text-left ml-2 mb-2">ADD YOUR FOODS</div>
+                        <div class="relative z-0 mb-6 w-full group">
+                            <input [(ngModel)]="foodItem" type="text"  class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Foods in Grams" required />
+                        </div>
+                                                    
+                        <button (click)="addToList()" class=" text-blue-400 flex-shrink-0  text-sm " type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                              </svg>
+                        </button>
+
+                        <div *ngFor="let t of items; let index = index;" class="bg-gray-200 mt-1 text-black px-4 py-3 rounded relative" role="alert">
+                            <strong class="font-medium text-2xl px-4">{{t.items[0].calories}} cal<span class="text-lg font-thin px-4">{{t.items[0].name | uppercase}} {{t.items[0].serving_size_g}}g</span></strong>
+                            <div class="block py-2">
+
+                                <span class="block sm:inline px-4">C: <span>{{t.items[0].carbohydrates_total_g}}g</span></span>
+                                <span class="block sm:inline px-4">P: <span>{{t.items[0].protein_g}}g</span></span>
+                                <span class="block sm:inline px-4">F: <span>{{t.items[0].fat_total_g}}g</span></span>
+                            </div>
+                            <button (click)="deleteTask(index)" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="red" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                    <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            
+
+                
+                <div class="block md:flex md:flex-row justify-around  mb-10 pb-3 rounded-2xl w-full px-6 py-4">
+                    <div class="bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 rounded-2xl mb-10 px-12 drop-shadow-2xl py-7">
+                        <div class="flex flex-wrap justify-center">
+                            <div class="w-full flex justify-center">
+                                <div class="relative">
+                                    <img src="assets/GetStrong/meat.png" class="rounded-full align-middle border-none absolute -m-16 -ml-10 lg:-ml-10 max-w-[70px]"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-7xl font-bold text-center py-3">{{totalProtein}}</div>
+                        <div class="font-thin text-center">Protein/g</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 rounded-2xl mb-10 px-12 drop-shadow-2xl py-7">
+
+                        <div class="flex flex-wrap justify-center">
+                            <div class="w-full flex justify-center">
+                                <div class="relative">
+                                    <img src="assets/GetStrong/carbs.png" class=" align-middle border-none absolute -mt-16 -ml-8  max-w-[70px]"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-7xl font-bold text-center  py-3">{{totalCarbs}}</div>
+                        <div class="font-thin   text-center">Carbs/g</div>
+                    </div>
+                    <div class="bg-gradient-to-bl from-yellow-200 via-green-200 to-green-500 rounded-2xl mb-10 px-12 drop-shadow-2xl py-7">
+                        <div class="flex flex-wrap justify-center">
+                            <div class="w-full flex justify-center">
+                                <div class="relative">
+                                    <img src="assets/GetStrong/oil.png" class="rounded-full align-middle border-none absolute -m-16 -ml-10 lg:-ml-10 max-w-[70px]"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-7xl font-bold text-center  py-3">{{totalFat}}</div>
+                        <div class="font-thin  text-center">Fats/g</div>
+                    </div>
+                </div>
+                <div class="text-center text-4xl py-8">Track Your Weight</div>
+
+                <app-weight-chart></app-weight-chart>
+
+    <body>
+
