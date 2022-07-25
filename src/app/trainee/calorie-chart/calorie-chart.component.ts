@@ -15,25 +15,19 @@ export class CalorieChartComponent implements OnInit {
     Chart.register(...registerables);
 
   }
-
-  takenCalories='2500';
+  totalCal='0'
 
 
   ngOnInit(): void {
-    this.generateChart('0');
-
+    this.generateChart();
   }
 
-  destroyChart(chart:Chart){
-    chart.destroy();
-  }
+  generateChart(){
 
-  generateChart(totalCal:string){
+    //let takenCalories=2500;
 
-   
-    console.log(0)
     //since its 0
-    let takenCalories=parseInt(this.takenCalories);
+    let takenCalories=parseInt(this.totalCal);
 
     //from database
     let requiredCalories = 2600;
@@ -60,7 +54,7 @@ export class CalorieChartComponent implements OnInit {
             // firstElement/Total * 100
             { data: [takenCalories,requiredCalories-takenCalories], label: 'Weight',   backgroundColor: [
               'orange',
-              'grey',
+              'transparent',
               
             ],
             borderRadius:7,

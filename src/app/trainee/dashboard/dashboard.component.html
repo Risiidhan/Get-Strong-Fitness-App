@@ -55,10 +55,11 @@
                                 <div class="row mb-3">
                                   <div class="col-4 w-50 ">
                                     <canvas class="chart" id="doughnut_chart"></canvas>
+                                    
                                   </div>
                                 </div>
-                            
                             </div>
+                            
                         </div>
                     </div>
                     <div class="rounded-2xl ml-2 basis-1/2 md:basis-1/2 text-black-600 bg-white px-12 py-8">
@@ -68,13 +69,13 @@
                         </div>
                                                     
                         <button (click)="addToList()" class=" text-blue-400 flex-shrink-0  text-sm " type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                               </svg>
                         </button>
 
-                        <div *ngFor="let t of items; let index = index;" class="bg-gray-200 mt-1 text-black px-4 py-3 rounded relative" role="alert">
-                            <strong class="font-medium text-2xl px-4">{{t.items[0].calories}} cal<span class="text-lg font-thin px-4">{{t.items[0].name | uppercase}} {{t.items[0].serving_size_g}}g</span></strong>
+                        <div *ngFor="let t of items; let index = index;" class="bg-gradient-to-r from-gray-100 to-gray-300 mt-1 text-black px-4 py-3 rounded relative" role="alert">
+                            <strong class="font-medium text-2xl px-4">{{t.items[0].calories}} cal<span class="text-sm font-thin px-4">{{t.items[0].name | uppercase}} {{t.items[0].serving_size_g}}g</span></strong>
                             <div class="block py-2">
 
                                 <span class="block sm:inline px-4">C: <span>{{t.items[0].carbohydrates_total_g}}g</span></span>
@@ -104,7 +105,7 @@
                         <div class="text-7xl font-bold text-center py-3">{{totalProtein}}</div>
                         <div class="font-thin text-center">Protein/g</div>
                     </div>
-                    <div class="bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 rounded-2xl mb-10 px-12 drop-shadow-2xl py-7">
+                    <div class="bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 rounded-2xl mb-10 px-12 drop-shadow-2xl py-7">
 
                         <div class="flex flex-wrap justify-center">
                             <div class="w-full flex justify-center">
@@ -116,7 +117,7 @@
                         <div class="text-7xl font-bold text-center  py-3">{{totalCarbs}}</div>
                         <div class="font-thin   text-center">Carbs/g</div>
                     </div>
-                    <div class="bg-gradient-to-bl from-yellow-200 via-green-200 to-green-500 rounded-2xl mb-10 px-12 drop-shadow-2xl py-7">
+                    <div class="bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 rounded-2xl mb-10 px-12 drop-shadow-2xl py-7">
                         <div class="flex flex-wrap justify-center">
                             <div class="w-full flex justify-center">
                                 <div class="relative">

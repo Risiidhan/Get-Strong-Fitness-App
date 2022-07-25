@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-import { CalculateCaloriesService } from '../calculate-calories.service';
+import { CalculateCaloriesService } from 'src/app/calculate-calories.service';
 import { Chart, registerables } from 'chart.js';
 
 
@@ -23,13 +23,13 @@ export class DashboardComponent implements OnInit {
     totalProtein='0';
     totalCarbs='0';
     totalFat='0';
-    totalCal='0';
+    totalCal='250';
     doughnut:any=null;
+    
 
 
   ngOnInit(): void {
     this.generateChart();
-
   }
 
   
@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit {
         ctx.font = "25px em Lato, bold, sans-serif";
         ctx.fillText(`calories`,width/2,top+(height/1.6));
         let chartStatus = Chart.getChart("doughnut_chart"); // <canvas> id
+        ctx.restore();
         
       }
     }
