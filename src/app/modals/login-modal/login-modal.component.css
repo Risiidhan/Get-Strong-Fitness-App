@@ -1,0 +1,11 @@
+.background{
+    background-image: url('../../../assets/GetStrong/banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img{
+    width: 20%;
+    height: 20%;
+}
+

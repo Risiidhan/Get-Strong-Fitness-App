@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CalculateCaloriesService } from '../calculate-calories.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-sidemenu',
@@ -7,10 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidemenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:Router ,private calService:CalculateCaloriesService) { }
 
-  color:string = 'white';
+  userType:string = '';
+
   ngOnInit(): void {
+    this.userType = this.calService.getUserType();
+  }
+
+  moveToDashboard(){
+    if(this.userType=='trainee'){
+      this.route.navigate(['/dashboard'])
+    }
+    if(this.userType=='admin'){
+      this.route.navigate(['/admin'])
+    }
+    if(this.userType=='instructor'){
+      this.route.navigate(['/instructor'])
+    }
   }
 
 }

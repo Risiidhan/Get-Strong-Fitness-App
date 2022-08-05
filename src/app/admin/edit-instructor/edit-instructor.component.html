@@ -1,0 +1,146 @@
+
+<body class="font-inter grid grid-cols-5 max-w-screen-2xl mx-auto ">
+
+    <app-sidemenu></app-sidemenu>
+    
+        <!-- Main -->
+        <div class="col-span-4  ">
+            <section class="px-8 py-6">
+
+    <div>
+
+        <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
+            <form>
+                
+                <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                    Search / Delete Instructor
+                </div>
+                <div class="mb-6">
+                    <label for="full Name" class="block mb-2 text-sm font-medium">Username</label>
+                    <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                  </div>       
+                  <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Search</button>                   
+                                <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete</button>
+                                                  
+                    </form>
+
+                    <div class="flex mt-3 flex-row md:justify-center overflow-x-auto relative">
+                        <table class="md:ml-23 rounded-2xl w-500 text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="py-3 px-6">
+                                        Username
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Full Name
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Age
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Address
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Gender
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Contact No
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Password
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        <span class="sr-only">Delete</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cus of customer" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{cus.username}}
+                                    </th>
+                                    <td class="py-4 px-6">
+                                        {{cus.name}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.age}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.address}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.gender}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.contact}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.password}}
+                                    </td>
+                                    <td class="py-4 px-6 text-right opacity-75">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="red" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                            <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+                                        </svg>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+        <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
+            <form>
+                
+                <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                    Add Instructor
+                </div>
+                <div class="mb-6">
+                    <label for="full Name" class="block mb-2 text-sm font-medium">Username</label>
+                    <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                  </div>
+                        <div class="mb-6">
+                            <label for="full Name" class="block mb-2 text-sm font-medium">Full Name</label>
+                            <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                          </div>
+                          <div class="mb-6">
+                              <label for="Age" class="block mb-2 text-sm font-medium">Age</label>
+                              <input type="number" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                            </div>
+                            <div class="mb-6">
+                              <label for="address" class="block mb-2 text-sm font-medium">Address</label>
+                              <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                            </div>
+                            <div class="mb-6">
+                                <label for="address" class="block mb-2 text-sm font-medium">Gender</label>
+                                <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                              </div>
+                            <div class="mb-6">
+                                <label for="contact" class="block mb-2 text-sm font-medium">Contact No</label>
+                                <input type="number" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                              </div>
+                              <div class="mb-6">
+                                <label for="contact" class="block mb-2 text-sm font-medium">Password</label>
+                                <input type="number" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                              </div>
+                     
+                          
+                          
+                                <button type="button" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Insert</button>
+                                                  
+                    </form>
+                    
+                </div>
+                
+            </div>
+
+               
+                </section>
+        </div>
+    
+
+
+    
+
+
+    
+    

@@ -16,22 +16,48 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  item=[{
+    "items": [
+      {
+        "sugar_g": 2.6,
+        "fiber_g": 1.2,
+        "serving_size_g": 100.0,
+        "sodium_mg": 4,
+        "name": "tomato",
+        "potassium_mg": 23,
+        "fat_saturated_g": 0.0,
+        "fat_total_g": 0.2,
+        "calories": 18.2,
+        "cholesterol_mg": 0,
+        "protein_g": 0.9,
+        "carbohydrates_total_g": 3.9
+      }
+    ]
+  }]
 
     // set propertise
+    username: string='User';
     items:any[] = [];
     foodItem='';
     totalProtein='0';
     totalCarbs='0';
     totalFat='0';
-    totalCal='250';
+    totalCal='0';
     doughnut:any=null;
+    
     
 
 
   ngOnInit(): void {
-    this.generateChart();
+     this.generateChart();
+     this.getUser();
   }
 
+
+
+  getUser(){
+    this.username = this.calService.getUsername();
+  }
   
   generateChart(){
     //since its 0

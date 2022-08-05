@@ -1,3 +1,4 @@
+
 <div class="container">
     <!-- banner region -->
         <div class="text-white w-screen h-screen bg-no-repeat bg-center bg-cover bg-fixed " style="background-image: linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),url(assets/GetStrong/banner.jpg);">
@@ -19,12 +20,12 @@
               </li>
               <div class=" border-t-2 border-gray-300 flex flex-col items-center"></div>
               <li class="cursor-pointer inline-block mr-8 md:pt-0 pr-12 pb-2 pl-2 md:pl-0 pt-2 hover:decoration-teal-500 hover:underline-offset-8 hover:decoration-3 no-underline hover:underline">
-                <a>about</a>
+                <a (click)="scrollToAbout()">about</a>
               </li>
               <div class=" border-t-2 border-gray-300 flex flex-col items-center"></div>
   
               <li class="cursor-pointer inline-block pt-2 md:pt-0 mr-8 pr-8 pb-3 pl-2 md:pl-0 hover:decoration-teal-500 hover:underline-offset-8 hover:decoration-3 no-underline hover:underline">
-                <a>login</a>
+                <a (click)="openDialog()">login</a>
               </li>
   
                 </ul>
@@ -37,7 +38,7 @@
       <div class=" text-center banner-content">
             <img src="assets/GetStrong/logo.png" class="w-20 md:w-70 md:w-60 ml-auto mr-auto block mb-10" alt="">
             <p class="text-lg md:text-3xl uppercase mb-10">Build Your Dream Physique with <br> get strong</p>
-            <button type="button" class="py-2.5 px-12 mr-2 mb-2 text-sm font-large text-teal-500 focus:outline-none bg-transparent rounded-full border border-2 hover:border-0 border-teal-500 hover:bg-teal-500 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-200 uppercase">login</button>        </div>
+            <button type="button" class="py-2.5 px-12 mr-2 mb-2 text-sm font-large text-teal-500 focus:outline-none bg-transparent rounded-full border border-2 hover:border-0 border-teal-500 hover:bg-teal-500 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-200 uppercase" (click)="openDialog()">login</button>        </div>
       </div>
   
       
@@ -46,7 +47,7 @@
   
   <!-- about -->
   <div class="text-center h-100 px-8 py-20">
-    <h4 class="text-xl md:text-3xl mb-10 uppercase font-bold">about us</h4>
+    <div id="aboutUs" class="text-xl md:text-3xl uppercase font-bold pb-6">About us</div>
     <p class="text-md md:text-xl">
       We have a variety of gym Equipment, trainers to help you in all aspects of fitness, which includes strength training, cardio, cross fitness, Pilates, Zumba. Work out centers are allocated in ( Wattala, Kotahena, Wallawatha )</p>
   </div>
@@ -87,10 +88,12 @@
   
   <!-- weight track -->
   <div class="text-white mt-5 text-center w-screen h-full bg-no-repeat bg-center bg-cover bg-fixed " style="background-image: linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),url(assets/GetStrong/banner.jpg);">
-    <div class="pt-10 text-xl md:text-3xl uppercase font-bold">Easy calorie tracking</div>
+    <div class="pt-10 text-xl md:text-3xl uppercase font-bold">Easy Weight tracking</div>
     <div class="h-100 px-8 py-6 md:py-10 grid grid-cols-1 text-center md:text-left md:grid-cols-2">
       <div class="px-4 tracking-wide leading-loose pt-12 mb-10 text-md md:text-xl">Research proves people that who log calories are capable to lose or gain more weight and are more likely to keep the weight off in the long run</div>
-      <img src="assets/GetStrong/calories.png" class="  w-1/2 ml-auto mr-auto block" alt="" srcset="">
+      <div class="flex flex-row items-center h-full">
+        <img src="assets/GetStrong/calories.png" class="  w-1/2 ml-auto mr-auto block" alt="" srcset="">
+      </div>
     </div>
   </div>
   
