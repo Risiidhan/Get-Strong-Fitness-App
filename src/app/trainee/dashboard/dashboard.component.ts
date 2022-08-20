@@ -1,7 +1,8 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-import { CalculateCaloriesService } from 'src/app/calculate-calories.service';
+import { CalculateCaloriesService } from 'src/app/services/calculate-calories.service';
 import { Chart, registerables } from 'chart.js';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Chart, registerables } from 'chart.js';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private calService:CalculateCaloriesService) { 
+  constructor(private calService:CalculateCaloriesService, private logService:LoginService) { 
     Chart.register(...registerables);
 
   }
@@ -56,7 +57,7 @@ export class DashboardComponent implements OnInit {
 
 
   getUser(){
-    this.username = this.calService.getUsername();
+    this.username = this.logService.getUsername();
   }
   
   generateChart(){

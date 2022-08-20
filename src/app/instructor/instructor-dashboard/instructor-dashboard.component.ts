@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalculateCaloriesService } from 'src/app/calculate-calories.service';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { CalculateCaloriesService } from 'src/app/calculate-calories.service';
 })
 export class InstructorDashboardComponent implements OnInit {
 
-  constructor(private calService:CalculateCaloriesService) { }
+  constructor(private logService:LoginService) { }
 
   workout = [
     {
@@ -106,7 +106,7 @@ export class InstructorDashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.username = this.calService.getUsername();
+    this.username = this.logService.getUsername();
 
   }
 

@@ -10,67 +10,87 @@
     <div>
 
         <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
-            <form>
+            <form #profileForm="ngForm" (ngSubmit)="updateUser(profileForm.value)" >
                 
                 <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
                     Edit Personal Info
                 </div>
                         <div class="mb-6">
                             <label for="full Name" class="block mb-2 text-sm font-medium">Full Name</label>
-                            <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
-                          </div>
+                            <input [ngClass]="{'border-red-600' : (!name.untouched || profileForm.submitted)&& name.errors?.required}"  [(ngModel)]="data[0].name" required ngModel #name="ngModel" name="name" id="name" type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border  text-gray-500 border-gray-300 sm:text-md">
+                            <p *ngIf="(!name.untouched || profileForm.submitted)&& name.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the name</p>
+        
+                        </div>
                           <div class="mb-6">
                               <label for="Age" class="block mb-2 text-sm font-medium">Age</label>
-                              <input type="number" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                              <input type="number" id="age" name="age" [ngClass]="{'border-red-600' : (!age.untouched || profileForm.submitted)&& age.errors?.required}"  required ngModel #age="ngModel"  [(ngModel)]="data[0].age"  class="block p-2.5 w-full text-gray-900  rounded-lg border text-gray-500 border-gray-300 sm:text-md">
+                            <p *ngIf="(!age.untouched || profileForm.submitted)&& age.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the age</p>
+
                             </div>
+
+                            <div class="mb-6">
+                                <label for="gender" class="block mb-2 text-sm font-medium">Gender</label>
+                                <select  id="gender" name="gender" [ngClass]="{'border-red-600' : (!gender.untouched || profileForm.submitted)&& gender.errors?.required}"  required ngModel #gender="ngModel" type="text" [(ngModel)]="data[0].gender"  class="block p-2.5 w-full text-gray-900  rounded-lg border text-gray-500 border-gray-300 sm:text-md">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                  </select>
+                                  <p *ngIf="(!gender.untouched || profileForm.submitted)&& gender.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please select the gender</p>
+  
+                              </div>
+
                             <div class="mb-6">
                               <label for="address" class="block mb-2 text-sm font-medium">Address</label>
-                              <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                              <input type="text" id="address" name="address" [ngClass]="{'border-red-600' : (!address.untouched || profileForm.submitted)&& address.errors?.required}"  required ngModel #address="ngModel" name="address" id="address" type="text" [(ngModel)]="data[0].address"  class="block p-2.5 w-full text-gray-900  rounded-lg border text-gray-500 border-gray-300 sm:text-md">
+                            <p *ngIf="(!address.untouched || profileForm.submitted)&& address.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the address</p>
+
                             </div>
                             <div class="mb-6">
                                 <label for="contact" class="block mb-2 text-sm font-medium">Contact No</label>
-                                <input type="number" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
-                              </div>
+                                <input type="number" id="contact" name="contact" [ngClass]="{'border-red-600' : (!contact.untouched || profileForm.submitted)&& contact.errors?.required}"  required ngModel #contact="ngModel" name="contact" id="contact" type="text" [(ngModel)]="data[0].contact"  class="block p-2.5 w-full text-gray-900  rounded-lg border text-gray-500 border-gray-300 sm:text-md">
+                            <p *ngIf="(!contact.untouched || profileForm.submitted)&& contact.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the contact</p>
+
+                            </div>
                      
                           
                           
                                 <!-- <button type="button" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Insert</button> -->
-                                <button type="button" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Update</button>
+                                <button (click)="updateUser(profileForm.value)" [disabled]="!profileForm.form.valid" type="button" class="disabled:opacity-50 disabled:cursor-not-allowed  text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Update</button>
                                 <!-- <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete</button> -->
                                                   
                     </form>
                     
                 </div>
                 <div *ngIf="userType=='trainee'" class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
-                    <form>
+                    <form #editTraineeProfile>
                         
                         <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
                             Edit BMI Info
                         </div>
                                 
                                     <div class="mb-6">
-                                      <label for="Age" class="block mb-2 text-sm font-medium">Height</label>
-                                      <input type="number" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+                                      <label for="height" class="block mb-2 text-sm font-medium">Height</label>
+                                      <input type="number" id="height" name="height" [ngClass]="{'border-red-600' : (!height.untouched || profileForm.submitted)&& height.errors?.required}"  required ngModel #height="ngModel" name="height" id="height" type="text" [(ngModel)]="data[0].height"  class="block p-2.5 w-full text-gray-900  rounded-lg border text-gray-500 border-gray-300 sm:text-md">
+                                      <p *ngIf="(!height.untouched || profileForm.submitted)&& height.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the height</p>
+          
                                     </div>
                                     <div class="mb-6">
-                                        <label for="contact" class="block mb-2 text-sm font-medium">Weight</label>
-                                        <input type="number" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
-                                     </div>
+                                        <label for="weight" class="block mb-2 text-sm font-medium">Weight</label>
+                                        <input type="number" id="weight" name="weight" [ngClass]="{'border-red-600' : (!weight.untouched || profileForm.submitted)&& weight.errors?.required}"  required ngModel #weight="ngModel" name="weight" id="weight" type="text" [(ngModel)]="data[0].weight"  class="block p-2.5 w-full text-gray-900  rounded-lg border text-gray-500 border-gray-300 sm:text-md">
+                                        <p *ngIf="(!weight.untouched || profileForm.submitted)&& weight.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the weight</p>
+                                       </div>
                              
                                   
                                   
                                         <!-- <button type="button" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Insert</button> -->
-                                        <button type="button" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Update</button>
+                                        <button (click)="updateUser(profileForm.value)" [disabled]="!editTraineeProfile.form.valid" type="button" class="disabled:opacity-50 disabled:cursor-not-allowed  text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Update</button>
                                         <!-- <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete</button> -->
                                                           
                             </form>
                             
                         </div>
-            </div>
-
-               
-                </section>
-        </div>
+            </div>           
+    </section>
+</div>
     
 
 

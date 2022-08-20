@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import { CalculateCaloriesService } from 'src/app/calculate-calories.service';
+import { LoginService } from 'src/app/services/login.service';
 import { AdminDashboardComponent } from 'src/app/admin/dashboard/admin-dashboard.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class LoginModalComponent implements OnInit {
 
   constructor(
     private route:Router,
-    private Cservice:CalculateCaloriesService,
+    private logService:LoginService,
     public dialogRef: MatDialogRef<LoginModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) { }
 
@@ -45,8 +45,8 @@ export class LoginModalComponent implements OnInit {
       if(this.trainee){
         if(this.username=='rk'&& this.password=='123'){
           this.dialogRef.close();
-          this.Cservice.setUsername(this.username);
-          this.Cservice.setUserType('trainee')
+          this.logService.setUsername(this.username);
+          this.logService.setUserType('trainee')
           this.route.navigate(['/dashboard'])
           alert('You have Logged in Successfully!')
         }else{
@@ -57,16 +57,16 @@ export class LoginModalComponent implements OnInit {
       }
       if(this.admin){
         this.dialogRef.close();
-        this.Cservice.setUserType('admin')
-        this.Cservice.setUsername('Admin');
+        this.logService.setUserType('admin')
+        this.logService.setUsername('Admin');
         alert('You have Logged in Successfully!')
         this.route.navigate(['/admin'])
 
       }
       if(this.instructor){
         this.dialogRef.close();
-        this.Cservice.setUserType('instructor')
-        this.Cservice.setUsername(this.username);
+        this.logService.setUserType('instructor')
+        this.logService.setUsername(this.username);
         alert('You have Logged in Successfully!')
         this.route.navigate(['/instructor'])
       }

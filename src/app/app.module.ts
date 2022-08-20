@@ -29,6 +29,7 @@ import { ViewTipsComponent } from './trainee/view-tips/view-tips.component';
 import { EditWorkoutsComponent } from './instructor/edit-workouts/edit-workouts.component';
 import { EditRecipeComponent } from './instructor/edit-recipe/edit-recipe.component';
 import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component';
+import { MessageModalComponent } from './modals/message-modal/message-modal.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component
     ViewTipsComponent,
     EditWorkoutsComponent,
     EditRecipeComponent,
-    ViewRecipeComponent
+    ViewRecipeComponent,
+    MessageModalComponent
   ],
   imports: [
     BrowserModule,
