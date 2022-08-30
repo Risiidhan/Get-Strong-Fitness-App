@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { getDatabase, set, ref, onValue, update, remove} from "firebase/database"
 import { Observable } from 'rxjs';
+import { Instructor } from '../classes/instructor';
+import { Trainee } from '../classes/trainee';
+
 
 
 @Injectable({
@@ -10,6 +13,7 @@ export class ServerService {
 
   adminInfo:any;
   selectedCustomerToEdit:any;
+  selectedInstructorToEdit:any;
   db = getDatabase();
 
   constructor() { }
@@ -27,6 +31,7 @@ export class ServerService {
       onlyOnce: true
     });
   }
+
 
   getCustomerDetails(username:string, arrayName:any){
     const customerDetails = ref(this.db, 'trainees/' + username);
@@ -66,11 +71,29 @@ export class ServerService {
   }
 
   getSelectedCustomerToEdit(username:string){
+    let customerDetail;
     const customerDetails = ref(this.db, 'trainees/' + username);
-    onValue(customerDetails, (snapshot) => this.selectedCustomerToEdit = [snapshot.val()])
-    return this.selectedCustomerToEdit;
+    onValue(customerDetails, (snapshot) => {
+      this.selectedCustomerToEdit = [snapshot.val()]
+      customerDetail = new Trainee(
+        this.selectedCustomerToEdit[0].username,
+        this.selectedCustomerToEdit[0].fullName,
+        this.selectedCustomerToEdit[0].gender,
+        this.selectedCustomerToEdit[0].age,
+        this.selectedCustomerToEdit[0].address,
+        this.selectedCustomerToEdit[0].contact,
+        this.selectedCustomerToEdit[0].password,
+        this.selectedCustomerToEdit[0].height,
+        this.selectedCustomerToEdit[0].weight,
+        this.selectedCustomerToEdit[0].exerciseLevel)
+    }
+
+    )
+      
+    return [customerDetail];
     
   }
+
   // customer service ends
 
 
@@ -93,5 +116,90 @@ export class ServerService {
 
   // profile for admin ends
 
+  // instructor service starts
+  addInstructor(form:any){
+    set(ref(this.db, 'instructor/' + form.username), {
+      username: form.username,
+      fullName: form.fullName,
+      age : form.age,
+      address: form.address,
+      gender: form.gender,
+      contact: form.contact,
+      password: form.password
+    });
+  }
+
+  getInstructorsCount(){ 
+    let count=0;
+    const dbRef = ref(this.db, 'instructor/');
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        count+=1       
+      });
+    }, {
+      onlyOnce: true
+    });
+    return count
+  }
+
+
+  getSelectedInstructorToEdit(username:string){
+    let instructorDetail;
+    const instructor = ref(this.db, 'instructor/' + username);
+    onValue(instructor, (snapshot) => {
+      this.selectedInstructorToEdit = [snapshot.val()]
+      instructorDetail = new Instructor(
+        this.selectedInstructorToEdit[0].username,
+        this.selectedInstructorToEdit[0].fullName,
+        this.selectedInstructorToEdit[0].gender,
+        this.selectedInstructorToEdit[0].age,
+        this.selectedInstructorToEdit[0].address,
+        this.selectedInstructorToEdit[0].contact,
+        this.selectedInstructorToEdit[0].password,
+      )
+    }
+
+    )
+      console.log(instructorDetail);
+      
+    return [instructorDetail];
+    
+  }
+  
+  removeInstructor(name:any){
+    remove(ref(this.db, 'instructor/' + name));
+  }
+
+  getAllInstructor(arrayName:any){
+    const dbRef = ref(this.db, 'instructor/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        arrayName.push(childSnapshot.val());        
+      });
+    }, {
+      onlyOnce: true
+    });
+  }
+
+  
+  updateInstructor(form:any){
+    update(ref(this.db, 'instructor/' + form.username), {
+      fullName: form.fullName,
+      age : form.age,
+      address: form.address,
+      gender: form.gender,
+      contact: form.contact,
+      password: form.password
+    });
+  }
+
+  getInstructorDetails(username:string, arrayName:any){
+    const customerDetails = ref(this.db, 'instructor/' + username);
+    onValue(customerDetails, (snapshot) => arrayName.push(snapshot.val()))
+  }
+
+  // instructors service ends
 
 }

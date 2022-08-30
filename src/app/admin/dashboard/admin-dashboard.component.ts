@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ServerService } from 'src/app/services/server.service';
+import { getDatabase, set, ref, onValue, update, remove} from "firebase/database"
 
 
 @Component({
@@ -8,6 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
+
+  InstructorsCount=0;
+  TraineesCount=0;
+  count=0;
+
+  instructors:any=[];
 
   customer = [
     {
@@ -100,10 +107,44 @@ export class AdminDashboardComponent implements OnInit {
   ]
 
   data:any;
-  constructor() { }
+  constructor(private server:ServerService) { }
 
   ngOnInit(): void {
-
+    this.getTraineesCount()
+    this.getInstructorsCount()
+    this.getAllInstructors()
   }
-  
-}
+
+
+  getAllInstructors(){
+    this.instructors=[];
+    this.server.getAllInstructor(this.instructors);
+  }
+
+  getTraineesCount(){
+    const db = getDatabase();
+    const dbRef = ref(db, 'trainees/');
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        this.TraineesCount++       
+      });
+    }, {
+      onlyOnce: true
+    });
+  }
+
+  getInstructorsCount(){ 
+    const db = getDatabase();
+    const dbRef = ref(db, 'instructor/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        this.InstructorsCount++       
+      });
+      console.log(this.InstructorsCount);
+    }, {
+      onlyOnce: true
+    });
+  }
+  }
+

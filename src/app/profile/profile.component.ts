@@ -43,11 +43,7 @@ export class ProfileComponent implements OnInit {
 
   getData(){
     if(this.userType=='admin'){
-      // this.data = this.server.getAdminDetails()
-      // this.server.getAdminDetails()
-
-      // console.log(this.data.data +' in component');
-    const db = getDatabase();
+      const db = getDatabase();
       const adminDetails = ref(db, 'admin/' + 'admin');
       onValue(adminDetails, (snapshot) => this.data = [snapshot.val()])
     }

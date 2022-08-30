@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'src/app/services/message.service';
+import { ServerService } from 'src/app/services/server.service';
 
 @Component({
   selector: 'app-edit-instructor',
@@ -7,32 +9,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditInstructorComponent implements OnInit {
 
-  constructor() { }
+  instructors:any=[];
+  data:any = [{}];
 
-                                                  
-  customer = [
-    {
-      username:'Risiidhan',
-      name:'Risiidhan Punniyamoorthy',
-      age: 21,
-      address:'7 Wintergreen Dr.Brookfield, WI 53045',
-      gender: 'male',
-      contact:'076638757',
-      password:'123'
-    },
-    {
-      username:'Kamal',
-      name:'Kamal Kumar',
-      age: 22,
-      address:'8688 Bohemia St.Conway, SC 29526',
-      gender: 'male',
-      contact:'0785555715',
-      password:'demkfme'
+  constructor(private messService:MessageService, private server:ServerService) { }
 
-    }
-  ];
   
   ngOnInit(): void {
+    this.getAllData();
   }
 
+
+  getSelectedInstructorToEdit(username:string){    
+    this.data = this.server.getSelectedInstructorToEdit(username);   
+    console.log(this.data);
+
+  }
+
+  addInstructor(form:any){
+      this.server.addInstructor(form);
+      this.getAllData();
+      this.messService.messageBox('Inserted');
+  }
+
+
+  updateInstructor(form:any){
+    this.server.updateInstructor(form);      
+    this.messService.messageBox('Updated');
+    this.getAllData();
+  }
+
+
+  getAllData(){
+    this.instructors=[];
+    this.server.getAllInstructor(this.instructors);
+  }
+
+
+  getInstructorDetails(form:any){
+    this.instructors=[];
+    let name =form.username
+    this.server.getInstructorDetails(form.username,this.instructors)
+  }
+
+  removeInstructor(form:any){
+    this.server.removeInstructor(form.username)
+    this.messService.messageBox('Removed');
+    this.getAllData();
+  }
+
+
+  removeInstructorFromTable(name:any){
+    this.server.removeInstructor(name)
+    this.messService.messageBox('Removed');
+    this.getAllData();
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Trainee } from 'src/app/classes/trainee';
 import { MessageService } from 'src/app/services/message.service';
 import { ServerService } from 'src/app/services/server.service';
 
@@ -11,6 +12,8 @@ import { ServerService } from 'src/app/services/server.service';
 })
 export class EditCustComponent implements OnInit {
 
+  // customer=new Trainee()
+
   customer:any=[];
   data:any = [{}];
 
@@ -18,11 +21,12 @@ export class EditCustComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllData();
+    
   }
 
 
-  getSelectedCustomerToEdit(username:string){
-    this.data = this.server.getSelectedCustomerToEdit(username);    
+  getSelectedCustomerToEdit(username:string){    
+    this.data = this.server.getSelectedCustomerToEdit(username);       
   }
 
   addCustomer(form:any){

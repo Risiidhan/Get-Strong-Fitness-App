@@ -1,6 +1,6 @@
 import { Users } from "./users";
 
-export class Trainee extends Users{
+export class Instructor extends Users{
     constructor(
      public username: string,
      public fullName: string,
@@ -8,10 +8,7 @@ export class Trainee extends Users{
      public age: number,
      public address: string,
      public contact: number,
-     public password: string,
-     public height: number,
-     public weight: number,
-     public exerciseLevel: string
+     public password: string
     ){
         super(
          username,

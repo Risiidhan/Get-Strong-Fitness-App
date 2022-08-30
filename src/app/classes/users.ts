@@ -5,7 +5,7 @@ export class Users {
         public gender: string,
         public age : number,
         public address : string,
-        public contactNo: number,
+        public contact: number,
         public password: string,
         ){}
 }

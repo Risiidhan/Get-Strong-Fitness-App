@@ -24,8 +24,8 @@
                                   </svg>
                             </div>
                             <div class="block md:flex md:flex-row justify-start items-end">
-                                <div class="text-3xl font-bold mr-3">2</div>
-                                <div class="font-thin ">Total Trainee Count</div>
+                                <div class="text-3xl font-bold mr-3">{{InstructorsCount}}</div>
+                                <div class="font-thin ">Total Instructor Count</div>
                             </div>
                         </div>
                         <div class="bg-gradient-to-r from-rose-400 to-orange-300 rounded-2xl mb-2 px-12 drop-shadow-2xl py-8 md:ml-6">
@@ -36,12 +36,12 @@
                                   </svg>
                             </div>
                             <div class="block md:flex md:flex-row justify-start items-end">
-                                <div class="text-3xl font-bold mr-3">2</div>
+                                <div class="text-3xl font-bold mr-3">{{TraineesCount}}</div>
                                 <div class="font-thin ">Total Trainers Count</div>
                             </div>
 
                         </div>
-                        <div class="Pastel bg-gradient-to-tr from-violet-500 to-orange-300 rounded-2xl mb-2 px-12 drop-shadow-2xl py-8 md:ml-8">
+                        <div routerLink="/edit-instructor" class="Pastel bg-gradient-to-tr from-violet-500 to-orange-300 rounded-2xl mb-2 px-12 drop-shadow-2xl py-8 md:ml-8">
                             <div class="font-medium mb-3">Option</div>
                             <div class="text-7xl font-bold opacity-25 font-bold py-3 text-white flex flex-row justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
@@ -60,7 +60,7 @@
 
                     <div class="flex flex-row md:justify-center overflow-x-auto relative">
                         <table class="md:ml-23 rounded-2xl w-500 text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="py-3 px-6">
                                         Username
@@ -78,43 +78,30 @@
                                         Gender
                                     </th>
                                     <th scope="col" class="py-3 px-6">
-                                        Contact No
+                                        Contact
                                     </th>
-                                    <th scope="col" class="py-3 px-6">
-                                        Password
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">
-                                        <span class="sr-only">Delete</span>
-                                    </th>
+                                  
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cus of customer" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <tr *ngFor="let instructor of instructors" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{cus.username}}
+                                        {{instructor?.username}}
                                     </th>
                                     <td class="py-4 px-6">
-                                        {{cus.name}}
+                                        {{instructor?.fullName}}
                                     </td>
                                     <td class="py-4 px-6">
-                                        {{cus.age}}
+                                        {{instructor.age}}
                                     </td>
                                     <td class="py-4 px-6">
-                                        {{cus.address}}
+                                        {{instructor.address}}
                                     </td>
                                     <td class="py-4 px-6">
-                                        {{cus.gender}}
+                                        {{instructor.gender}}
                                     </td>
                                     <td class="py-4 px-6">
-                                        {{cus.contact}}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        {{cus.password}}
-                                    </td>
-                                    <td class="py-4 px-6 text-right opacity-75">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="red" class="bi bi-archive-fill" viewBox="0 0 16 16">
-                                            <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
-                                        </svg>
+                                        {{instructor.contact}}
                                     </td>
                                 </tr>
                             </tbody>
