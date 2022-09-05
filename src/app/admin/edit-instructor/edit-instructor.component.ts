@@ -22,7 +22,6 @@ export class EditInstructorComponent implements OnInit {
 
   getSelectedInstructorToEdit(username:string){    
     this.data = this.server.getSelectedInstructorToEdit(username);   
-    console.log(this.data);
 
   }
 

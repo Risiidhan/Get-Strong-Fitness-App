@@ -30,6 +30,7 @@ import { EditWorkoutsComponent } from './instructor/edit-workouts/edit-workouts.
 import { EditRecipeComponent } from './instructor/edit-recipe/edit-recipe.component';
 import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component';
 import { MessageModalComponent } from './modals/message-modal/message-modal.component';
+import { ErrorMessageComponent } from './modals/error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MessageModalComponent } from './modals/message-modal/message-modal.comp
     EditWorkoutsComponent,
     EditRecipeComponent,
     ViewRecipeComponent,
-    MessageModalComponent
+    MessageModalComponent,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,

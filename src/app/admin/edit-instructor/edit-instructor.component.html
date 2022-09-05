@@ -60,7 +60,7 @@
                                         {{instructor?.username}}
                                     </th>
                                     <td class="py-4 px-6">
-                                        {{instructor?.fullName}}
+                                        {{instructor?.name}}
                                     </td>
                                     <td class="py-4 px-6">
                                         {{instructor.age}}
@@ -109,7 +109,7 @@
                 </div>
                         <div class="mb-6">
                             <label for="full Name" class="block mb-2 text-sm font-medium">Full Name</label>
-                            <input [(ngModel)]="data[0].fullName"  [ngClass]="{'border-red-600' : (!fullName.untouched || addInstructorForm.submitted)&& fullName.errors?.required}" required ngModel #fullName="ngModel" name="fullName" id="fullName" type="text" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                            <input [(ngModel)]="data[0].name"  [ngClass]="{'border-red-600' : (!fullName.untouched || addInstructorForm.submitted)&& fullName.errors?.required}" required ngModel #fullName="ngModel" name="fullName" id="fullName" type="text" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
                             <p *ngIf="(!fullName.untouched || addInstructorForm.submitted)&& fullName.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the Full Name</p>
   
                         </div>

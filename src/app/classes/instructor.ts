@@ -3,7 +3,7 @@ import { Users } from "./users";
 export class Instructor extends Users{
     constructor(
      public username: string,
-     public fullName: string,
+     public name: string,
      public gender: string,
      public age: number,
      public address: string,
@@ -12,7 +12,7 @@ export class Instructor extends Users{
     ){
         super(
          username,
-         fullName,
+         name,
          gender,
          age,
          address,

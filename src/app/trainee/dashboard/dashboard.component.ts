@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms'
 import { CalculateCaloriesService } from 'src/app/services/calculate-calories.service';
 import { Chart, registerables } from 'chart.js';
 import { LoginService } from 'src/app/services/login.service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -12,7 +14,10 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private calService:CalculateCaloriesService, private logService:LoginService) { 
+  constructor(
+    private calService:CalculateCaloriesService, 
+    private http: HttpClient,
+    private logService:LoginService) { 
     Chart.register(...registerables);
 
   }
@@ -65,6 +70,8 @@ export class DashboardComponent implements OnInit {
     let takenCalories=parseInt(this.totalCal);
     //from database
     let requiredCalories = 2600;
+    if(takenCalories>=requiredCalories){takenCalories = requiredCalories}
+
     let counter = {
       id:'counter',
       beforeDraw(chart:any,args:any,options:any){
@@ -150,7 +157,6 @@ export class DashboardComponent implements OnInit {
     let fat=0;
     let carbs=0;
     let protein =0;
-    console.log(this.items.length)
 
     for(let i=0;i<this.items.length;i++){
       carbs+=this.items[i].items[0].carbohydrates_total_g;
@@ -170,24 +176,21 @@ export class DashboardComponent implements OnInit {
 
   // get respond from api
   addFood(food:string){
+     //since its 0
+     let takenCalories=parseInt(this.totalCal);
+     //from database
+     let requiredCalories = 2600;
     this.calService.getCalories(food)
       .subscribe(data=>{
         this.items.push(data)
+        if(takenCalories<requiredCalories){ this.calculateCal()}
       })
-
   }
 
   //add food to list
-  public addToList() {
-    if (this.foodItem == '') {
-    }
-    else {
-        
+  public addToList() {        
         this.addFood(this.foodItem)
         this.foodItem = '';
-        this.calculateCal()
-
-    }
   }
 
   //remove food from list

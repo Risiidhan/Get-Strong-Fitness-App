@@ -120,7 +120,7 @@ export class ServerService {
   addInstructor(form:any){
     set(ref(this.db, 'instructor/' + form.username), {
       username: form.username,
-      fullName: form.fullName,
+      name: form.fullName,
       age : form.age,
       address: form.address,
       gender: form.gender,
@@ -150,7 +150,7 @@ export class ServerService {
       this.selectedInstructorToEdit = [snapshot.val()]
       instructorDetail = new Instructor(
         this.selectedInstructorToEdit[0].username,
-        this.selectedInstructorToEdit[0].fullName,
+        this.selectedInstructorToEdit[0].name,
         this.selectedInstructorToEdit[0].gender,
         this.selectedInstructorToEdit[0].age,
         this.selectedInstructorToEdit[0].address,

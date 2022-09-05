@@ -10,28 +10,29 @@
     <div>
 
         <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
-            <form>
+            <form #searchTipForm="ngForm">
                 
                 <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
                     Search / Delete Tips
                 </div>
                 <div class="mb-6">
-                    <label for="full Name" class="block mb-2 text-sm font-medium">Username</label>
-                    <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
-                  </div>       
-                  <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800">Search</button>                   
-                                <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete</button>
-                                                  
+                    <label for="title" class="block mb-2 text-sm font-medium">Title</label>
+                    <input required ngModel #tipTitle="ngModel" name="tipTitle" id="tipTitle" type="text" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                </div>       
+                  <button [disabled]="!searchTipForm.form.valid" (click)="searchTip(searchTipForm.value)" type="submit"  class="disabled:opacity-50 disabled:cursor-not-allowed  text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Search</button>
+                  <button [disabled]="!searchTipForm.form.valid" (click)="deleteTip(searchTipForm.value.tipTitle)" type="button" class="disabled:opacity-50 disabled:cursor-not-allowed  text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Delete</button>
+                  <button (click)="getAllTips()" type="button" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">View All</button>               
+                                          
                     </form>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                         <div class="row" *ngFor="let tip of tips">
-                            <div class="rounded-lg w-full border shadow-md bg-blue-200 rounded-2xl mb-2 px-12 py-8">
+                            <div class="rounded-lg h-full w-full border shadow-md bg-blue-200 rounded-2xl mb-2 px-12 py-8">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="grey" class="bi bi-lightbulb" viewBox="0 0 16 16">
                                     <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
                                 </svg>
-                                    <h5 class="mb-2 text-2xl font-bolder text-gray-700">{{tip.title}}</h5>
-                                <p class="mb-3 font-thin">{{tip.decription}}</p>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="red" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                    <h5 class="mb-2 text-2xl font-bolder text-gray-700">{{tip?.title}}</h5>
+                                <p class="mb-3 font-thin">{{tip?.description}}</p>
+                                <svg (click)="deleteTip(tip.title)"  xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="red" class="bi bi-archive-fill" viewBox="0 0 16 16">
                                     <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
                                 </svg>
 
@@ -41,23 +42,28 @@
                     
                 </div>
         <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
-            <form>
+            <form #addTipForm="ngForm" (ngSubmit)="addTip(addTipForm.value)">
                 
                 <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
                     Add / Edit Tips
                 </div>
                         <div class="mb-6">
-                            <label for="full Name" class="block mb-2 text-sm font-medium">Title</label>
-                            <input type="text" class="block p-2.5 w-full text-gray-900  rounded-lg border border-gray-300 sm:text-md">
+
+                            <label for="title" class="block mb-2 text-sm font-medium">Title</label>
+                            <input [(ngModel)]="data[0].title" [ngClass]="{'border-red-600' : (!title.untouched || addTipForm.submitted)&& title.errors?.required}" required ngModel #title="ngModel" name="title" id="title" type="text" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                            <p *ngIf="(!title.untouched || addTipForm.submitted)&& title.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the title</p>
+
                           </div>
                           <div class="mb-6">
-                              <label for="Age" class="block mb-2 text-sm font-medium">Description</label>
-                              <textarea id="message" rows="4" class="block p-2.5 w-full text-sm rounded-lg border border-gray-300"></textarea> 
+                            <label for="description" class="block mb-2 text-sm font-medium">description</label>
+                            <textarea [(ngModel)]="data[0].description" [ngClass]="{'border-red-600' : (!description.untouched || addTipForm.submitted)&& description.errors?.required}" required ngModel #description="ngModel" name="description" id="description" type="text" rows="4" class="block p-2.5 w-full text-sm rounded-lg border border-gray-300"></textarea> 
+                            <p *ngIf="(!description.untouched || addTipForm.submitted)&& description.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the description</p>
                           </div>
                           
-                                <button type="button" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Insert</button>
-                                <button type="button" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Update</button>
-                    </form>
+                          <button [disabled]="!addTipForm.form.valid" type="submit"  class="disabled:opacity-50 disabled:cursor-not-allowed  text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Insert</button>
+                          <button [disabled]="!addTipForm.form.valid" (click)="updateTip(addTipForm.value)" type="button" class="disabled:opacity-50 disabled:cursor-not-allowed  text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Update</button>
+      </form>
+
                     
                 </div>
                 

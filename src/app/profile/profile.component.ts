@@ -27,9 +27,6 @@ export class ProfileComponent implements OnInit {
     this.getData();
   }
 
-  upeUser(form:any){
-    alert(200)
-  }
 
   updateUser(form:any){
     const db = getDatabase();
@@ -45,6 +42,11 @@ export class ProfileComponent implements OnInit {
     if(this.userType=='admin'){
       const db = getDatabase();
       const adminDetails = ref(db, 'admin/' + 'admin');
+      onValue(adminDetails, (snapshot) => this.data = [snapshot.val()])
+    }
+    if(this.userType=='instructor'){
+      const db = getDatabase();
+      const adminDetails = ref(db, 'instructor/' + 'Hari');
       onValue(adminDetails, (snapshot) => this.data = [snapshot.val()])
     }
   }

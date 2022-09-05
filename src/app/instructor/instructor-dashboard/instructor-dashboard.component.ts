@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import { getDatabase, set, ref, onValue, update, remove} from "firebase/database"
+
 
 
 @Component({
@@ -79,35 +81,31 @@ export class InstructorDashboardComponent implements OnInit {
     }
   ]
 
-  tips = [
-    {
-      title:'Gain Weight',
-      decription:' consectetur nam quod neque dolore, distinctio tempore.',
-    },
-    {
-      title:'Hig Carbs',
-      decription:' consectetur nam quod neque dolore, distinctio tempore.',
-    },
-    {
-      title:'Hig Carbs',
-      decription:' consectetur nam quod neque dolore, distinctio tempore.',
-    },
-    {
-      title:'Hig Carbs',
-      decription:' consectetur nam quod neque dolore, distinctio tempore.',
-    },
-    {
-      title:'Hig Carbs',
-      decription:' consectetur nam quod neque dolore, distinctio tempore.',
-    }
-  ]
+  tips:any = [];
+
 
   username: string='User';
 
 
   ngOnInit(): void {
     this.username = this.logService.getUsername();
-
+    this.getAllTips()
   }
 
+  getAllTips(){
+    this.tips=[];
+    const db = getDatabase();
+    const dbRef = ref(db, 'tip/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        this.tips.push(childSnapshot.val());    
+        console.log(childSnapshot.val());
+            
+      });
+    }, {
+      onlyOnce: true
+    });    
+  }
 }
