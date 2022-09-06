@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, set, ref, onValue, update, remove} from "firebase/database"
+import { getDatabase, get, child, set, ref, onValue, update, remove} from "firebase/database"
+import { ErrorMessageService } from 'src/app/services/error-message.service';
 import { Observable } from 'rxjs';
 import { Instructor } from '../classes/instructor';
 import { Trainee } from '../classes/trainee';
+
 
 
 
@@ -11,12 +13,14 @@ import { Trainee } from '../classes/trainee';
 })
 export class ServerService {
 
+  
+
   adminInfo:any;
   selectedCustomerToEdit:any;
   selectedInstructorToEdit:any;
   db = getDatabase();
 
-  constructor() { }
+  constructor(private errorMessService: ErrorMessageService) { }
 
   // customer services start
   getAllCustomer(arrayName:any){
@@ -38,20 +42,7 @@ export class ServerService {
     onValue(customerDetails, (snapshot) => arrayName.push(snapshot.val()))
   }
 
-  addCustomer(form:any){
-    set(ref(this.db, 'trainees/' + form.username), {
-      username: form.username,
-      fullName: form.fullName,
-      age : form.age,
-      address: form.address,
-      gender: form.gender,
-      contact: form.contact,
-      password: form.password,
-      weight: form.weight,
-      height: form.height,
-      exerciseLevel: form.exerciseLevel
-    });
-  }
+
 
   updateCustomer(form:any){
     update(ref(this.db, 'trainees/' + form.username), {
@@ -77,6 +68,7 @@ export class ServerService {
       this.selectedCustomerToEdit = [snapshot.val()]
       customerDetail = new Trainee(
         this.selectedCustomerToEdit[0].username,
+        this.selectedCustomerToEdit[0].email,
         this.selectedCustomerToEdit[0].fullName,
         this.selectedCustomerToEdit[0].gender,
         this.selectedCustomerToEdit[0].age,
@@ -85,7 +77,8 @@ export class ServerService {
         this.selectedCustomerToEdit[0].password,
         this.selectedCustomerToEdit[0].height,
         this.selectedCustomerToEdit[0].weight,
-        this.selectedCustomerToEdit[0].exerciseLevel)
+        this.selectedCustomerToEdit[0].exerciseLevel
+        )
     }
 
     )
@@ -117,17 +110,7 @@ export class ServerService {
   // profile for admin ends
 
   // instructor service starts
-  addInstructor(form:any){
-    set(ref(this.db, 'instructor/' + form.username), {
-      username: form.username,
-      name: form.fullName,
-      age : form.age,
-      address: form.address,
-      gender: form.gender,
-      contact: form.contact,
-      password: form.password
-    });
-  }
+ 
 
   getInstructorsCount(){ 
     let count=0;
@@ -150,6 +133,7 @@ export class ServerService {
       this.selectedInstructorToEdit = [snapshot.val()]
       instructorDetail = new Instructor(
         this.selectedInstructorToEdit[0].username,
+        this.selectedInstructorToEdit[0].email,
         this.selectedInstructorToEdit[0].name,
         this.selectedInstructorToEdit[0].gender,
         this.selectedInstructorToEdit[0].age,

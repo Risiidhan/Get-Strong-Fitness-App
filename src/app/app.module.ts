@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AngularFireModule } from '@angular/fire/compat';
 
 import { HomeComponent } from './home/home.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
@@ -31,6 +32,7 @@ import { EditRecipeComponent } from './instructor/edit-recipe/edit-recipe.compon
 import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component';
 import { MessageModalComponent } from './modals/message-modal/message-modal.component';
 import { ErrorMessageComponent } from './modals/error-message/error-message.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { ErrorMessageComponent } from './modals/error-message/error-message.comp
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import {Router} from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -10,7 +11,10 @@ import {Router} from '@angular/router';
 })
 export class SidemenuComponent implements OnInit {
 
-  constructor(private route:Router ,private logService:LoginService) { }
+  constructor(private route:Router ,
+    private logService:LoginService,
+    private auth: AuthService,
+    ) { }
 
   userType:string = '';
 
@@ -28,6 +32,10 @@ export class SidemenuComponent implements OnInit {
     if(this.userType=='instructor'){
       this.route.navigate(['/instructor'])
     }
+  }
+
+  logout(){
+    this.auth.logout()
   }
 
 }

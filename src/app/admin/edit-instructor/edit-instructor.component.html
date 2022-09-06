@@ -107,6 +107,12 @@
                     <p *ngIf="(!username.untouched || addInstructorForm.submitted)&& username.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the Username</p>
 
                 </div>
+                <div class="mb-6">
+                    <label for="email" class="block mb-2 text-sm font-medium">Email</label>
+                    <input [(ngModel)]="data[0].email" [ngClass]="{'border-red-600' : (!email.untouched || addInstructorForm.submitted)&& email.errors?.required}" required ngModel #email="ngModel" name="email" id="email" type="text" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                    <p *ngIf="(!email.untouched || addInstructorForm.submitted)&& email.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please Enter the email</p>
+
+                </div>
                         <div class="mb-6">
                             <label for="full Name" class="block mb-2 text-sm font-medium">Full Name</label>
                             <input [(ngModel)]="data[0].name"  [ngClass]="{'border-red-600' : (!fullName.untouched || addInstructorForm.submitted)&& fullName.errors?.required}" required ngModel #fullName="ngModel" name="fullName" id="fullName" type="text" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
