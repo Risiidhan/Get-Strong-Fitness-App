@@ -5,6 +5,7 @@ import { Chart, registerables } from 'chart.js';
 import { LoginService } from 'src/app/services/login.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ServerService } from 'src/app/services/server.service';
 
 
 @Component({
@@ -17,32 +18,16 @@ export class DashboardComponent implements OnInit {
   constructor(
     private calService:CalculateCaloriesService, 
     private http: HttpClient,
+    private db:ServerService,
     private logService:LoginService) { 
     Chart.register(...registerables);
 
   }
 
-  item=[{
-    "items": [
-      {
-        "sugar_g": 2.6,
-        "fiber_g": 1.2,
-        "serving_size_g": 100.0,
-        "sodium_mg": 4,
-        "name": "tomato",
-        "potassium_mg": 23,
-        "fat_saturated_g": 0.0,
-        "fat_total_g": 0.2,
-        "calories": 18.2,
-        "cholesterol_mg": 0,
-        "protein_g": 0.9,
-        "carbohydrates_total_g": 3.9
-      }
-    ]
-  }]
+  item=[{}]
 
     // set propertise
-    username: string='User';
+    username: any='User';
     items:any[] = [];
     foodItem='';
     totalProtein='0';
@@ -50,27 +35,64 @@ export class DashboardComponent implements OnInit {
     totalFat='0';
     totalCal='0';
     doughnut:any=null;
+    customer:any=[];
+    currentWeight:string='';
+    exerciseLevel:string='';
+    requiredCalorie:string='';
+
+
     
     
 
 
   ngOnInit(): void {
-     this.generateChart();
-     this.getUser();
+    this.getUser();
+    this.generateChart();
   }
 
 
 
   getUser(){
-    this.username = this.logService.getUsername();
+    this.username = localStorage.getItem('token')
+    this.db.getCustomerDetails(this.username,this.customer);
+    
+    let currentWeight = this.customer[0].weight;
+    this.currentWeight=currentWeight
+    let exLevel = this.customer[0].exerciseLevel;
+    this.exerciseLevel=exLevel;
+    let heightInCm = this.customer[0].height * 30.48;
+    let age = this.customer[0].age;
+    let gender = this.customer[0].gender;
+    let requiredCal;
+
+    if(gender == 'Female'){
+      requiredCal = 655.1 + (9.563*currentWeight) + (1.850*heightInCm) - (4.676*age)
+      if(exLevel=='Not Very Active')  {requiredCal=requiredCal*1.1}
+      if(exLevel=='Moderately Active')  {requiredCal=requiredCal*1.2}
+      if(exLevel=='Exercises 1-3 days/week')  {requiredCal=requiredCal*1.375}
+      if(exLevel=='Exercises 3-5 days/week')  {requiredCal=requiredCal*1.55}
+      requiredCal=requiredCal.toFixed(0)
+      this.requiredCalorie=requiredCal
+
+    }
+    if(gender == 'Male'){
+      requiredCal = 66.47 + (13.75*parseInt(currentWeight)) + (5.003*(heightInCm/1)) - (6.755*parseInt(age))
+      if(exLevel=='Not Very Active')  {requiredCal=requiredCal*1.1}
+      if(exLevel=='Moderately Active')  {requiredCal=requiredCal*1.2}
+      if(exLevel=='Exercises 1-3 days/week')  {requiredCal=requiredCal*1.375}
+      if(exLevel=='Exercises 3-5 days/week')  {requiredCal=requiredCal*1.55}
+      requiredCal=requiredCal.toFixed(0)
+      this.requiredCalorie=requiredCal
+    }
+    
   }
   
   generateChart(){
     //since its 0
     let takenCalories=parseInt(this.totalCal);
-    //from database
-    let requiredCalories = 2600;
-    if(takenCalories>=requiredCalories){takenCalories = requiredCalories}
+    //from database    
+    let requiredCalories = parseInt(this.requiredCalorie);
+    if(takenCalories>=requiredCalories) {takenCalories = requiredCalories}
 
     let counter = {
       id:'counter',

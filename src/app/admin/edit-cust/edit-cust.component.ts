@@ -57,7 +57,7 @@ export class EditCustComponent implements OnInit {
       set(ref(db, 'trainees/' + form.username), {
         username: form.username,
         email: form.email,
-        fullName: form.fullName,
+        name: form.fullName,
         age : form.age,
         address: form.address,
         gender: form.gender,

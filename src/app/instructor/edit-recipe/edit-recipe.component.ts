@@ -19,7 +19,7 @@ export class EditRecipeComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getAllFoods()
+    this.getAllFoods()  
   }
 
   addFood(form:any){

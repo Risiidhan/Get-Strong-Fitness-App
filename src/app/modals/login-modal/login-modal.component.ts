@@ -53,70 +53,18 @@ export class LoginModalComponent implements OnInit {
     const db = getDatabase();
 
       if(this.trainee){
-
-        const q = query(ref(db,'trainees'), orderByChild('email'), equalTo(this.email));
-
-        get(q)
-        .then((snapshot)=>{
-          if(!snapshot.val()) return alert('No such email registered under trainees')
-          snapshot.forEach(childSnapshot => {
-            this.userDetails = childSnapshot.val()
-            this.username = this.userDetails.username
-
-            this.logService.setUsername(this.username);
-            this.logService.setUserType('trainee')
-            this.auth.login(this.email,this.password,this.username)
-            this.dialogRef.close();
-
-          })
-
-          
-        })
-
-        // this.auth.login(this.email,this.password)
-        //   this.dialogRef.close();
-        //   this.logService.setUsername(this.username);
-        //   this.logService.setUserType('trainee')
-        //   this.route.navigate(['/dashboard'])
-        //   alert('You have Logged in Successfully!')
+        this.auth.login(this.email,this.password,'trainee')
       }
+      
       if(this.admin){
-
-        const q = query(ref(db,'admin'), orderByChild('email'), equalTo(this.email));
-
-        get(q)
-        .then((snapshot)=>{
-          if(!snapshot.val()) return alert('No such email registered under admin')
-          snapshot.forEach(childSnapshot => {
-            this.userDetails = childSnapshot.val()
-            this.username = this.userDetails.username
-
-            this.logService.setUsername(this.username);
-            this.logService.setUserType('admin')
-            this.auth.login(this.email,this.password,this.username)
-            this.dialogRef.close();
-
-          })
-      })
+        this.auth.login(this.email,this.password,'admin')
       }
     
       if(this.instructor){
-        const q = query(ref(db,'instructor'), orderByChild('email'), equalTo(this.email));
+        this.auth.login(this.email,this.password,'instructor')
+      }
 
-        get(q)
-        .then((snapshot)=>{
-          if(!snapshot.val()) return alert('No such email registered under instructor')
-          snapshot.forEach(childSnapshot => {
-            this.userDetails = childSnapshot.val()
-            this.username = this.userDetails.username
+      this.dialogRef.close();
 
-            this.logService.setUsername(this.username);
-            this.logService.setUserType('instructor')
-            this.auth.login(this.email,this.password,this.username)
-            this.dialogRef.close();
-
-          })
-      })
-    }
 }
 }

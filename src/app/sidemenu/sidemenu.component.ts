@@ -16,10 +16,10 @@ export class SidemenuComponent implements OnInit {
     private auth: AuthService,
     ) { }
 
-  userType:string = '';
+  userType:any;
 
   ngOnInit(): void {
-    this.userType = this.logService.getUserType();
+    this.userType = localStorage.getItem('userType')
   }
 
   moveToDashboard(){

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { getDatabase, get, child, set, ref, onValue, update, remove} from "firebase/database"
+
 
 @Component({
   selector: 'app-view-recipe',
@@ -9,69 +11,28 @@ export class ViewRecipeComponent implements OnInit {
 
   constructor() { }
 
-  recipes=[
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    },
-    {
-      name:'Food Name',
-      items:'Food Items, abc, efg, hit',
-      description:' praesentium. Vero, modi impedit, non aut, minima odit quam porro labore fuga quo quasi. Dolorum.',
-    }
-  ]
+  recipes:any=[{}]
+
+
+
   ngOnInit(): void {
+    this.getAllFoods()
+
   }
 
+
+  getAllFoods(){
+    this.recipes=[];
+    const db = getDatabase();
+    const dbRef = ref(db, 'food/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        this.recipes.push(childSnapshot.val());    
+      });
+    }, {
+      onlyOnce: true
+    });    
+  }
 }

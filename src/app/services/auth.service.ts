@@ -5,6 +5,9 @@ import { LoginService } from './login.service';
 import { MessageService } from './message.service';
 import { ServerService } from './server.service';
 import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { getDatabase, get, child, set, ref, query, equalTo, orderByChild, onValue, update, remove} from "firebase/database";
+
 
 
 
@@ -22,6 +25,7 @@ export class AuthService {
     private messService:MessageService,) { }
 
     userType:any;
+    userDetails:any;
 
   //register method
 
@@ -44,22 +48,68 @@ export class AuthService {
 
   //login method
 
-  login(email:string, password: string,username:string){
+  login(email:string, password: string,userT:string){
     this.auth.signInWithEmailAndPassword(email,password)
-      .then( () =>{
-        localStorage.setItem('token',username);
-        this.userType=this.logService.getUserType()
-        alert('You have Logged in successfully')
 
-        if(this.userType=='trainee'){
-          this.route.navigate(['/dashboard'])
+      .then( () =>{
+
+        const db = getDatabase();
+
+        if(userT=='trainee'){
+
+          const q = query(ref(db,'trainees'), orderByChild('email'), equalTo(email));
+  
+          get(q)
+          .then((snapshot)=>{
+            if(!snapshot.val()) return alert('No such email registered under trainees')
+            snapshot.forEach(childSnapshot => {
+              this.userDetails = childSnapshot.val()
+              localStorage.setItem('token',this.userDetails.username);  
+              localStorage.setItem('userType','trainee')
+              this.messService.messageBox('logged In')
+              this.route.navigate(['/dashboard'])
+
+            })          
+          })
         }
-        if(this.userType=='admin'){
-          this.route.navigate(['/admin'])
+
+        if(userT=='admin'){
+
+          const q = query(ref(db,'admin'), orderByChild('email'), equalTo(email));
+  
+          get(q)
+          .then((snapshot)=>{
+            if(!snapshot.val()) return alert('No such email registered under admin')
+            snapshot.forEach(childSnapshot => {
+              this.userDetails = childSnapshot.val()
+              localStorage.setItem('token',this.userDetails.username);  
+              localStorage.setItem('userType','admin')
+              this.messService.messageBox('logged In')
+              this.route.navigate(['/admin'])
+
+            })          
+          })
         }
-        if(this.userType=='instructor'){
-          this.route.navigate(['/instructor'])
+
+
+        if(userT=='instructor'){
+
+          const q = query(ref(db,'instructor'), orderByChild('email'), equalTo(email));
+  
+          get(q)
+          .then((snapshot)=>{
+            if(!snapshot.val()) return alert('No such email registered under instructor')
+            snapshot.forEach(childSnapshot => {
+              this.userDetails = childSnapshot.val()
+              localStorage.setItem('token',this.userDetails.username);  
+              localStorage.setItem('userType','instructor')
+              this.messService.messageBox('logged In')
+              this.route.navigate(['/instructor'])
+
+            })          
+          })
         }
+
       },err =>{
         let code = `(${err.code})`
         let m = err.message
@@ -74,6 +124,8 @@ export class AuthService {
     this.auth.signOut()
       .then(()=>{
         localStorage.removeItem('token');
+        localStorage.removeItem('userType');
+
         this.route.navigate(['/home'])
       })
   }

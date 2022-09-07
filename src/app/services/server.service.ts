@@ -46,7 +46,7 @@ export class ServerService {
 
   updateCustomer(form:any){
     update(ref(this.db, 'trainees/' + form.username), {
-      fullName: form.fullName,
+      name: form.fullName,
       age : form.age,
       address: form.address,
       gender: form.gender,
@@ -69,7 +69,7 @@ export class ServerService {
       customerDetail = new Trainee(
         this.selectedCustomerToEdit[0].username,
         this.selectedCustomerToEdit[0].email,
-        this.selectedCustomerToEdit[0].fullName,
+        this.selectedCustomerToEdit[0].name,
         this.selectedCustomerToEdit[0].gender,
         this.selectedCustomerToEdit[0].age,
         this.selectedCustomerToEdit[0].address,

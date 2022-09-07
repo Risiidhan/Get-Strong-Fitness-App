@@ -84,11 +84,11 @@ export class InstructorDashboardComponent implements OnInit {
   tips:any = [];
 
 
-  username: string='User';
+  username:any;
 
 
   ngOnInit(): void {
-    this.username = this.logService.getUsername();
+    this.username = localStorage.getItem('token')
     this.getAllTips()
   }
 
@@ -100,9 +100,7 @@ export class InstructorDashboardComponent implements OnInit {
     onValue(dbRef, (snapshot) => {
       snapshot.forEach((childSnapshot) => {
         const childKey = childSnapshot.key;
-        this.tips.push(childSnapshot.val());    
-        console.log(childSnapshot.val());
-            
+        this.tips.push(childSnapshot.val());                
       });
     }, {
       onlyOnce: true

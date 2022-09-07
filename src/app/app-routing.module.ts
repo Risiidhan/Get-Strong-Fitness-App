@@ -12,6 +12,7 @@ import { EditTipsComponent } from './instructor/edit-tips/edit-tips.component';
 import { ViewTipsComponent } from './trainee/view-tips/view-tips.component';
 import { EditRecipeComponent } from './instructor/edit-recipe/edit-recipe.component';
 import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component';
+import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'dashboard',component:DashboardComponent},
   {path:'admin',component:AdminDashboardComponent},
   {path:'profile',component:ProfileComponent},
+  {path:'edit-profile',component:CusProfileComponent},
   {path:'edit-customer',component:EditCustComponent},
   {path:'edit-instructor',component:EditInstructorComponent},
   {path:'workouts',component:ViewWorkoutsComponent},

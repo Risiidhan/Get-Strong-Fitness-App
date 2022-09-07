@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
 import { getDatabase, set, ref, onValue, update} from "firebase/database"
+import { MessageService } from 'src/app/services/message.service';
 import { ServerService } from 'src/app/services/server.service';
-import { MessageService } from '../services/message.service';
 
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-cus-profile',
+  templateUrl: './cus-profile.component.html',
+  styleUrls: ['./cus-profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class CusProfileComponent implements OnInit {
 
   constructor(
-    private logService:LoginService, 
     private server:ServerService,
-    private messService:MessageService) { }
+    private messService:MessageService
+  ) { }
 
   username:any='';
   userType:any = '';
@@ -27,7 +26,6 @@ export class ProfileComponent implements OnInit {
     this.getData();
   }
 
-
   updateUser(form:any){
     const db = getDatabase();
     if(this.userType=='admin'){
@@ -36,27 +34,13 @@ export class ProfileComponent implements OnInit {
     this.messService.messageBox('Updated')
   }
 
-
-
   getData(){
-    if(this.userType=='admin'){
-      const db = getDatabase();
-      const adminDetails = ref(db, 'admin/' + 'admin');
-      onValue(adminDetails, (snapshot) => this.data = [snapshot.val()])
-    }
-    if(this.userType=='instructor'){
-      const db = getDatabase();
-      const adminDetails = ref(db, 'instructor/' + this.username);
-      onValue(adminDetails, (snapshot) => this.data = [snapshot.val()])
-    }
     if(this.userType=='trainee'){
       const db = getDatabase();
       const adminDetails = ref(db, 'trainees/' + this.username);
       onValue(adminDetails, (snapshot) => this.data = [snapshot.val()])
     }
   }
- 
-
 
   setUserType(){
     this.userType = localStorage.getItem('userType')

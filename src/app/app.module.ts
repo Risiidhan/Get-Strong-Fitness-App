@@ -33,6 +33,7 @@ import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component
 import { MessageModalComponent } from './modals/message-modal/message-modal.component';
 import { ErrorMessageComponent } from './modals/error-message/error-message.component';
 import { environment } from 'src/environments/environment';
+import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { environment } from 'src/environments/environment';
     EditRecipeComponent,
     ViewRecipeComponent,
     MessageModalComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    CusProfileComponent
   ],
   imports: [
     BrowserModule,
