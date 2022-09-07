@@ -59,8 +59,6 @@ export class EditTipsComponent implements OnInit {
     onValue(tip, (snapshot) => {
       if(snapshot.val()){this.tips = [snapshot.val()]}     
     })
-    form.form.reset();
-
   }
 
   deleteTip(title:any){
