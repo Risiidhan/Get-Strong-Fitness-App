@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { getDatabase, child, get, set, ref, onValue, update, remove} from "firebase/database"
+import { ErrorMessageService } from 'src/app/services/error-message.service';
+import { MessageService } from 'src/app/services/message.service';
+
 
 
 @Component({
@@ -10,75 +14,12 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
 })
 export class EditWorkoutsComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private messService:MessageService,
+    private errorMessService:ErrorMessageService) { }
 
-  workout = [
-    {
-      title:'Full Body',
-      category:'Advanced',
-      targetMuscle:'Entire Body',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-        
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    }
-  ]
+  workout:any = []
 
   searchWorkoutForm = new FormGroup({
     workoutName: new FormControl(''),
@@ -95,6 +36,7 @@ export class EditWorkoutsComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.getAllWorkout()
   }
 
   get shedule() {
@@ -117,15 +59,70 @@ export class EditWorkoutsComponent implements OnInit {
   }
 
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.editWorkoutForm.value);
-    // alert(this.searchWorkoutForm.value.workoutName);
-    let l = this.editWorkoutForm.value.shedule.length
-    for(let i=0; i<l;i++){
-      console.log(this.editWorkoutForm.value.shedule[i].exerciseName,this.editWorkoutForm.value.shedule[i].setAndReps)
-    }
+  onSubmit(form:any) {
+    const db = getDatabase();
+    const dbRef = ref(db)
+    get(child(dbRef,'workout/' + form.title))
+      .then((snapshot)=>{
+        if(snapshot.val()) return this.errorMessService.messageBox('This workout already exists')
+        
+          set(ref(db, 'workout/' + form.title), {
+            title: form.title,
+            category:form.category,
+            targetMuscle:form.targetMuscle,
+            schedule:form.shedule
+          });
+        this.getAllWorkout()
+        this.messService.messageBox('Inserted');
+      })
   }
+
+  updateTip(form:any){
+    const db = getDatabase();
+    update(ref(db, 'workout/' + form.title), {
+      title: form.title,
+      category:form.category,
+      targetMuscle:form.targetMuscle,
+      schedule:form.shedule
+    });
+    this.getAllWorkout()
+    this.messService.messageBox('Updated');
+
+  }
+
+  deleteWorkout(form:any){
+    const db = getDatabase();
+    remove(ref(db, 'workout/' + form.workoutName));
+    this.getAllWorkout()
+    this.messService.messageBox('Deleted');
+  }
+
+  searchTip(form:any){
+    this.workout=[];
+    const db = getDatabase();
+    const tip = ref(db, 'workout/' + form.workoutName);
+    onValue(tip, (snapshot) => {
+      if(snapshot.val()){this.workout = [snapshot.val()]}     
+    })
+  }
+
+
+  getAllWorkout(){
+    this.workout=[];
+    const db = getDatabase();
+    const dbRef = ref(db, 'workout/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        console.log(childSnapshot.val());
+        this.workout.push(childSnapshot.val());    
+      });
+    }, {
+      onlyOnce: true
+    });    
+  }
+  
 
   
 

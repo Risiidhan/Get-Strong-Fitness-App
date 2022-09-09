@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getDatabase, get, child, set, ref, query, equalTo, orderByChild, onValue, update, remove} from "firebase/database";
 
 @Component({
   selector: 'app-view-workouts',
@@ -9,75 +10,44 @@ export class ViewWorkoutsComponent implements OnInit {
 
   constructor() { }
 
-  workout = [
-    {
-      title:'Full Body',
-      category:'Advanced',
-      targetMuscle:'Entire Body',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-        
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
+  begineerWorkout:any = []
+  advancedWorkout:any=[]
+  intermediateWorkout:any=[]
 
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    }
-  ]
   
   ngOnInit(): void {
+    this.getWorkout()
+  }
+
+  getWorkout(){
+
+    const db = getDatabase();
+    
+    const begineer = query(ref(db,'workout'), orderByChild('category'), equalTo('Begineer'));
+    const advanced = query(ref(db,'workout'), orderByChild('category'), equalTo('Advanced'));
+    const intermediate = query(ref(db,'workout'), orderByChild('category'), equalTo('Intermediate'));
+
+  
+         get(begineer)
+          .then((snapshot)=>{
+            snapshot.forEach(childSnapshot => {
+              this.begineerWorkout.push(childSnapshot.val())
+            })          
+          })
+
+          get(advanced)
+          .then((snapshot)=>{
+            snapshot.forEach(childSnapshot => {
+              this.advancedWorkout.push(childSnapshot.val())
+            })          
+          })
+          
+          get(intermediate)
+          .then((snapshot)=>{
+            snapshot.forEach(childSnapshot => {
+              this.intermediateWorkout.push(childSnapshot.val())
+            })          
+          })
   }
 
 }
