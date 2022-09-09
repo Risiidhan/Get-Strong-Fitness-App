@@ -48,10 +48,6 @@ export class DashboardComponent implements OnInit {
     this.getFoodListFromDb()
   }
 
-
-
-  
-  
   generateChart(){
     //since its 0
     let takenCalories=parseInt(this.totalCal);

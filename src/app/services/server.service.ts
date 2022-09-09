@@ -57,6 +57,19 @@ export class ServerService {
     });
   }
 
+  updateCustomerFromDb(form:any,username?:any){
+    update(ref(this.db, 'trainees/' + username), {
+      name: form.name,
+      age : form.age,
+      address: form.address,
+      gender: form.gender,
+      contact: form.contact,
+      // weight: form.weight,
+      height: form.height,
+      exerciseLevel: form.exerciseLevel
+    });
+  }
+
   removeCustomer(name:any){
     remove(ref(this.db, 'trainees/' + name));
   }
@@ -176,6 +189,16 @@ export class ServerService {
       gender: form.gender,
       contact: form.contact,
       password: form.password
+    });
+  }
+
+  updateInstructorFromProfile(form:any,username?:any){
+    update(ref(this.db, 'instructor/' + username), {
+      fullName: form.name,
+      age : form.age,
+      address: form.address,
+      gender: form.gender,
+      contact: form.contact,
     });
   }
 

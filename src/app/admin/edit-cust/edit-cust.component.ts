@@ -69,6 +69,13 @@ export class EditCustComponent implements OnInit {
         exerciseLevel: form.exerciseLevel
     });
   })
+ 
+    set(ref(db, 'userDailyWeight/' + form.username), {
+      weight:[form.weight],
+      date:[date.replace('2022','').replace('0','').replace('0','')]
+    });  
+    
+  
   this.getAllData();
   }
 

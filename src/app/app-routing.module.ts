@@ -13,6 +13,7 @@ import { ViewTipsComponent } from './trainee/view-tips/view-tips.component';
 import { EditRecipeComponent } from './instructor/edit-recipe/edit-recipe.component';
 import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component';
 import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component';
+import { EditWorkoutsComponent } from './instructor/edit-workouts/edit-workouts.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path:'tips',component:ViewTipsComponent},
   {path:'edit-recipe',component:EditRecipeComponent},
   {path:'recipe',component:ViewRecipeComponent},
+  {path:'edit-workout',component:EditWorkoutsComponent}
 
 ];
 

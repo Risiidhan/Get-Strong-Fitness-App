@@ -1,1 +1,121 @@
-<p>edit-workouts works!</p>
+
+<body class="font-inter grid grid-cols-5 max-w-screen-2xl mx-auto ">
+
+    <app-sidemenu></app-sidemenu>
+    
+        <!-- Main -->
+        <div class="col-span-4  ">
+            <section class="px-8 py-6">
+
+    <div>
+
+        <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
+            <form [formGroup]="searchWorkoutForm">
+                
+                <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                    Search / Delete Workout
+                </div>
+                <div class="mb-6">
+                    <label for="title" class="block mb-2 text-sm font-medium">First Name: </label>
+                    <input required id="workoutName" type="text" formControlName="workoutName" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                </div> 
+
+                <button type="submit" [disabled]="!searchWorkoutForm.valid" class="disabled:opacity-50 disabled:cursor-not-allowed  text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Search</button>
+                <button type="submit" [disabled]="!searchWorkoutForm.valid" class="disabled:opacity-50 disabled:cursor-not-allowed  text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Delete</button>
+                <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">View All</button>    
+                                          
+            </form>
+   
+            <div class="flex flex-row overflow-x-auto flex-nowrap mb-10 pb-3">
+
+                <div class="row mr-4" *ngFor="let x of workout">
+                    <div class="border-2 border-black bg-white rounded-2xl mb-2 px-12 py-8 md:ml-6">
+                        <h5 class="mb-2 text-xl font-thin ">{{x.category}}</h5>
+                        <h5 class="mb-4 editFont text-2xl text-blue-600 font-semibold">Muscle Group: {{x.targetMuscle}}</h5>
+                        <span class="text-3xl mb-4 mb-3 text-gray-500 dark:text-gray-400 font-semibold">{{x.title}}</span>
+                        <div *ngFor="let x of x.shedule| keyvalue">
+                            <li class="flex space-x-3 flex-row sm:justify-start md:justify-center my-2">
+                            <!-- Icon -->
+                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-blue-600 dark:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span class="text-base whitespace-nowrap font-normal leading-tight">{{x.key}} : {{x.value}}</span>
+                            </li>
+                        </div>                    
+                    </div>
+                </div>
+                </div>                    
+                </div>
+
+        <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
+
+                <form [formGroup]="editWorkoutForm" (ngSubmit)="onSubmit()">
+                
+                    <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                        Edit Workout
+                    </div>
+                    <div class="mb-6">
+                        <label for="title" class="block mb-2 text-sm font-medium">Title </label>
+                        <input required id="title" type="text" formControlName="title" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                    </div> 
+                    <div class="mb-6">
+                        <label for="category" class="block mb-2 text-sm font-medium">Category </label>
+                        <input required id="category" type="text" formControlName="category" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                    </div> 
+                    <div class="mb-6">
+                        <label for="targetMuscle" class="block mb-2 text-sm font-medium">TargetMuscle </label>
+                        <input required id="targetMuscle" type="text" formControlName="targetMuscle" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                    </div> 
+                   
+                    <h3>Schedule</h3>
+                    <div formArrayName="shedule" *ngFor="let shd of shedule.controls; let l=last; let i=index;">
+
+
+                    <div [formGroupName]="i">
+
+                        <div class="grid md:grid-cols-2 md:gap-4">
+                            <div class="relative z-0 mb-6 w-full group">
+                                <label for="exerciseName" class="block mb-2 text-sm font-medium">Exercise Name </label>
+                                <input required id="exerciseName{{i}}" type="text" formControlName="exerciseName" class=" text-gray-500 p-2.5 fieldWidth rounded-lg border border-gray-300 sm:text-md">
+                            </div>
+                            <div class="relative z-0 mb-6 w-full group">
+                        <div class="grid md:grid-cols-2 md:gap-6">
+                            <div class="col-start-1 col-end-2">
+                                <label for="setAndReps" class="block mb-2 text-sm font-medium">Sets and Reps </label>
+                                <input required id="setAndReps{{i}}" type="text" formControlName="setAndReps" class=" text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                            </div>
+                            <div class="flex flex-row justify-start fieldButtons">
+                                <button *ngIf="shedule.length>1" (click)="removeExercise(i)" class=" removeFieldBtn fieldBtn disabled:opacity-50 disabled:cursor-not-allowed text-red-400 flex-shrink-0  text-sm " type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                                    </svg>
+                                </button>
+                                <button *ngIf="l" [disabled]="!shedule.valid" (click)="addExercise()" class=" addFieldBtn fieldBtn disabled:opacity-50 disabled:cursor-not-allowed text-blue-400 flex-shrink-0  text-sm " type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+
+                          </div>
+                      </div>
+                    </div>
+                    <button type="submit" [disabled]="!editWorkoutForm.valid" class="disabled:opacity-50 disabled:cursor-not-allowed  text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Insert</button>
+                    <button type="submit" [disabled]="!editWorkoutForm.valid" class="disabled:opacity-50 disabled:cursor-not-allowed  text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">Update</button>
+                                              
+                </form>
+                </div>
+                
+            </div>
+
+               
+                </section>
+        </div>
+    
+
+
+    
+
+
+    
+    

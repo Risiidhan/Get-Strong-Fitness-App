@@ -27,9 +27,11 @@ export class CusProfileComponent implements OnInit {
   }
 
   updateUser(form:any){
+
+    let username = localStorage.getItem('token')
     const db = getDatabase();
-    if(this.userType=='admin'){
-      this.server.updateAdminDetails(form)
+    if(this.userType=='trainee'){
+      this.server.updateCustomerFromDb(form,username)
     }
     this.messService.messageBox('Updated')
   }

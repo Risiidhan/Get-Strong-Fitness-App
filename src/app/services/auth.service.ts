@@ -7,8 +7,7 @@ import { ServerService } from './server.service';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { getDatabase, get, child, set, ref, query, equalTo, orderByChild, onValue, update, remove} from "firebase/database";
-
-
+import { getAuth, deleteUser } from "firebase/auth";
 
 
 @Injectable({
@@ -45,6 +44,8 @@ export class AuthService {
         }
       )
   }
+
+
 
   //login method
 
