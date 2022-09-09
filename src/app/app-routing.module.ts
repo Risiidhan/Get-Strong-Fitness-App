@@ -31,8 +31,7 @@ const routes: Routes = [
   {path:'tips',component:ViewTipsComponent},
   {path:'edit-recipe',component:EditRecipeComponent},
   {path:'recipe',component:ViewRecipeComponent},
-  {path:'edit-workout',component:EditWorkoutsComponent}
-
+  {path:'edit-workout',component:EditWorkoutsComponent},
 ];
 
 @NgModule({

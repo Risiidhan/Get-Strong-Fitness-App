@@ -130,4 +130,18 @@ export class AuthService {
         this.route.navigate(['/home'])
       })
   }
+
+  //forgot password
+  forgotPassword(email:any){
+    this.auth.sendPasswordResetEmail(email).
+      then(()=>{
+        alert(email)
+        this.messService.messageBox('Verification link has sent')
+      },err=>{
+        let code = `(${err.code})`
+        let m = err.message
+        let message = m.replace(code,'').replace('Firebase:','')
+        this.errMess.messageBox(message)
+      })
+  }
 }

@@ -34,6 +34,7 @@ import { MessageModalComponent } from './modals/message-modal/message-modal.comp
 import { ErrorMessageComponent } from './modals/error-message/error-message.component';
 import { environment } from 'src/environments/environment';
 import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component';
+import { ForgotPasswordComponent } from './modals/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component
     ViewRecipeComponent,
     MessageModalComponent,
     ErrorMessageComponent,
-    CusProfileComponent
+    CusProfileComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

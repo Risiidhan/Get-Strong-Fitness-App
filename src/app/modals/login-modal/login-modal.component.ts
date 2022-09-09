@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { LoginService } from 'src/app/services/login.service';
 import { AdminDashboardComponent } from 'src/app/admin/dashboard/admin-dashboard.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,6 +19,7 @@ export class LoginModalComponent implements OnInit {
 
   constructor(
     private route:Router, 
+    public dialog:MatDialog,
     private logService:LoginService,
     private auth: AuthService,
     public dialogRef: MatDialogRef<LoginModalComponent>,
@@ -33,6 +36,14 @@ export class LoginModalComponent implements OnInit {
     instructor=false;
 
     ngOnInit(): void {
+    }
+
+    openDialog(): void {
+      const dialogRef = this.dialog.open(ForgotPasswordComponent, {
+        panelClass: 'app-full-bleed-dialog',
+        width: '450px',
+      });
+      this.dialogRef.close(); 
     }
 
     switchUser(user:string){
