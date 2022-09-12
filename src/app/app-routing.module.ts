@@ -14,7 +14,8 @@ import { EditRecipeComponent } from './instructor/edit-recipe/edit-recipe.compon
 import { ViewRecipeComponent } from './trainee/view-recipe/view-recipe.component';
 import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component';
 import { EditWorkoutsComponent } from './instructor/edit-workouts/edit-workouts.component';
-
+import { ChatComponent } from './chat/chat.component';
+import { MessageComponent } from './instructor/message/message.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home', pathMatch: 'full'},
@@ -32,6 +33,10 @@ const routes: Routes = [
   {path:'edit-recipe',component:EditRecipeComponent},
   {path:'recipe',component:ViewRecipeComponent},
   {path:'edit-workout',component:EditWorkoutsComponent},
+  {path:'chat',component:ChatComponent},
+  {path:'chats',component:MessageComponent},
+
+
 ];
 
 @NgModule({

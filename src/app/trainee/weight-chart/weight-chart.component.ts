@@ -19,8 +19,9 @@ export class WeightChartComponent implements OnInit {
   dates:any=[];
   addedWeight:number=74.2;
   lineChart:any;
+  
   ngOnInit(): void {
-    this.generateChart()
+    this.generateChart()  
   }
 
    //generate chart

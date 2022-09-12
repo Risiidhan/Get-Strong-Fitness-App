@@ -1,0 +1,49 @@
+.chatBox{
+    height: 550px;
+}
+
+.chat-container{
+    margin-left: -65px;
+}
+.title{
+    margin-left: 20px;
+}
+
+.chatName{
+    background-color: rgba(190, 190, 190, 0.308);
+}
+
+.chatLeftHeight{
+    margin-top: 10px;
+}
+
+.rec-mess{
+    background-color: rgba(190, 190, 190, 0.308);
+
+}
+
+.sender-mess{
+    background-color: rgba(24, 131, 163, 0.616);
+
+}
+.time{
+    font-size: 11px;
+    margin-left: 15px;
+}
+.bg{
+    background-image: url("../../assets/GetStrong/chat.jpg");
+}
+
+.nameIcon{
+    background-color:  rgba(24, 131, 163, 0.616);
+    height: 30px;
+    padding-top: 4px;
+    border-radius: 100%;
+    width: 8%;
+    font-size: 18px;
+
+}
+.senderName{
+    margin-top: 5px;
+    font-size: 18px;
+}
