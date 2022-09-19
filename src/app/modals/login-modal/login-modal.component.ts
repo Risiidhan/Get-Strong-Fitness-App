@@ -34,8 +34,13 @@ export class LoginModalComponent implements OnInit {
     admin=false;
     trainee=true;
     instructor=false;
+    show: boolean = false;
 
     ngOnInit(): void {
+    }
+
+    showPassword() {
+      this.show = !this.show;
     }
 
     openDialog(): void {
@@ -79,3 +84,4 @@ export class LoginModalComponent implements OnInit {
 
 }
 }
+

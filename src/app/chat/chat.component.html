@@ -14,12 +14,11 @@
             <ul class="overflow-auto h-[32rem]">
             <li class="chatName" *ngFor="let mess of chat">
               <button
-                class="flex w-full focus:font-medium focus:bg-cyan-700 active:bg-cyan-700 items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
+                class="flex w-full focus:font-medium focus:bg-cyan-700 active:bg-cyan-700 items-center px-5 py-2 text-sm transition duration-150 ease-in-out cursor-pointer hover:bg-gray-100 focus:outline-none">
                 <div class="w-full pb-2">
                   <div class="flex justify-start">
                     <span class="nameIcon">{{mess.to[0]}}</span>
                     <span class="block ml-2 senderName font-thin">{{mess.to}}</span>
-
                   </div>
                 </div>
               </button>
@@ -32,7 +31,7 @@
             <div class="relative flex items-center p-3 border-b border-gray-300">
               <span class="block ml-2 font-bold text-gray-600">{{currentChat[0].to}}</span>
             </div>
-            <div class="bg relative w-full p-6 overflow-y-auto chatBox">
+            <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="bg relative w-full p-6 overflow-y-auto chatBox">
               <ul class="space-y-2" *ngFor="let mess of currentChat">
                 <div *ngFor="let mess of mess.messages">
                     <li *ngIf="mess.from != username" class="flex justify-start">

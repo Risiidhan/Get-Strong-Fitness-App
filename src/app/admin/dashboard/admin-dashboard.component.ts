@@ -38,73 +38,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   ];
 
-  workout = [
-    {
-      title:'Full Body',
-      category:'Advanced',
-      targetMuscle:'Entire Body',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-        
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    },
-    {
-      title:'Bro Split',
-      category:'Beginner',
-      targetMuscle:'Chest Day',
-      shedule:{
-        exercise1 : '5 set x 12 rep',
-        exercise2 : '5 set x 12 rep',
-        exercise3 : '5 set x 12 rep',
-        exercise4 : '5 set x 12 rep',
-        exercise5 : '5 set x 12 rep',
-      }
-
-    }
-  ]
+  workout:any = []
 
   data:any;
   constructor(private server:ServerService) { }
@@ -113,6 +47,7 @@ export class AdminDashboardComponent implements OnInit {
     this.getTraineesCount()
     this.getInstructorsCount()
     this.getAllInstructors()
+    this.getAllWorkout()
   }
 
 
@@ -146,5 +81,22 @@ export class AdminDashboardComponent implements OnInit {
       onlyOnce: true
     });
   }
+
+  getAllWorkout(){
+    this.workout=[];
+    const db = getDatabase();
+    const dbRef = ref(db, 'workout/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        console.log(childSnapshot.val());
+        this.workout.push(childSnapshot.val());    
+      });
+    }, {
+      onlyOnce: true
+    });    
+  }
+
   }
 

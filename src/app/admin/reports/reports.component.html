@@ -1,0 +1,114 @@
+
+<body class="font-inter grid grid-cols-5 max-w-screen-2xl mx-auto ">
+
+    <app-sidemenu></app-sidemenu>
+    
+        <!-- Main -->
+        <div class="col-span-4  ">
+            <section class="px-8 py-6">
+
+    <div>
+
+        <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
+            <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                Customer Reports
+                <input (change)="onChangeCustomer($event.target)" type="date" class="border-none">
+            </div>
+
+                    <div class="flex flex-row md:justify-center overflow-y-auto max-h-min h-52  overflow-x-auto relative">
+                        <table class="md:ml-23 rounded-2xl w-500 text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="py-3 px-6">
+                                        Full Name
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Address
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Contact
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Join Date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cus of customer" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="py-4 px-6">
+                                        {{cus?.name}}
+                                    </td>
+                                  
+                                    <td class="py-4 px-6">
+                                        {{cus.address}}
+                                    </td>
+                                    
+                                    <td class="py-4 px-6">
+                                        {{cus.contact}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.joinDate}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                        Instructor Reports
+                        <input (change)="onChangeInstructor($event.target)" type="date" class="border-none">
+
+                    </div>
+                            <div class="flex flex-row md:justify-center overflow-y-auto max-h-min h-52  overflow-x-auto relative">
+                                <table class="md:ml-23 rounded-2xl w-500 text-sm text-left text-gray-500 dark:text-gray-400">
+                                    <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="py-3 px-6">
+                                                Full Name
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">
+                                                Address
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">
+                                                Contact
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">
+                                                Join Date
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let cus of instructors" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td class="py-4 px-6">
+                                                {{cus?.name}}
+                                            </td>
+                                          
+                                            <td class="py-4 px-6">
+                                                {{cus.address}}
+                                            </td>
+                                            
+                                            <td class="py-4 px-6">
+                                                {{cus.contact}}
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                {{cus.joinDate}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    
+                </div>                
+            </div>
+
+               
+                </section>
+        </div>
+    
+
+
+    
+
+
+    
+    

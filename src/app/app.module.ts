@@ -37,6 +37,7 @@ import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component
 import { ForgotPasswordComponent } from './modals/forgot-password/forgot-password.component';
 import { ChatComponent } from './chat/chat.component';
 import { MessageComponent } from './instructor/message/message.component';
+import { ReportsComponent } from './admin/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { MessageComponent } from './instructor/message/message.component';
     CusProfileComponent,
     ForgotPasswordComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

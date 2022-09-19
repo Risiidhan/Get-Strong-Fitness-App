@@ -16,6 +16,7 @@ import { CusProfileComponent } from './trainee/cus-profile/cus-profile.component
 import { EditWorkoutsComponent } from './instructor/edit-workouts/edit-workouts.component';
 import { ChatComponent } from './chat/chat.component';
 import { MessageComponent } from './instructor/message/message.component';
+import { ReportsComponent } from './admin/reports/reports.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home', pathMatch: 'full'},
@@ -35,6 +36,8 @@ const routes: Routes = [
   {path:'edit-workout',component:EditWorkoutsComponent},
   {path:'chat',component:ChatComponent},
   {path:'chats',component:MessageComponent},
+  {path:'report',component:ReportsComponent},
+
 
 
 ];

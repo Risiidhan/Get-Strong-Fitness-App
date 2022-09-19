@@ -11,6 +11,7 @@
 
 .chatName{
     background-color: rgba(190, 190, 190, 0.308);
+    border-radius: 25px;
 }
 
 .chatLeftHeight{

@@ -31,6 +31,7 @@ export class ChatComponent implements OnInit {
     }    
   ]
  
+  
 
   currentChat:any=[{
     senderName:this.username,
@@ -40,10 +41,13 @@ export class ChatComponent implements OnInit {
   } ]
 
   ngOnInit(): void {
-    this.getUserDetails()
+      this.getUserDetails()
     this.loadMessages()
     // this.loadChatOf('hari')
   }
+
+
+  
 
   getUserDetails(){
     this.username=localStorage.getItem('token')
