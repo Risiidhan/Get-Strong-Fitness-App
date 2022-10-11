@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ServerService } from 'src/app/services/server.service';
+import { ErrorMessageService } from 'src/app/services/error-message.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private calService:CalculateCaloriesService, 
     private http: HttpClient,
+    private errMess:ErrorMessageService,
     private db:ServerService,
     private logService:LoginService) { 
     Chart.register(...registerables);
@@ -41,6 +43,7 @@ export class DashboardComponent implements OnInit {
     reqCarb:any
     reqFat:any
     reqPro:any
+    test:any[] = [];
 
     
   ngOnInit(): void {
@@ -165,11 +168,19 @@ export class DashboardComponent implements OnInit {
      let requiredCalories = 2600;
     this.calService.getCalories(food)
       .subscribe(data=>{
-        this.items.push(data)
-        if(takenCalories<requiredCalories){ 
-          this.calculateCal()
+        this.test=[]
+        this.test.push(data)
+        if(this.test[0].items.length==0){
+          this.errMess.messageBox('Sorry! No Such Food')
         }
-        this.addFoodListToDb()
+
+        if(this.test[0].items.length>0){ 
+          this.items.push(data)
+          if(takenCalories<requiredCalories){ 
+            this.calculateCal()
+          }
+          this.addFoodListToDb()
+        }
 
       })
   }
@@ -233,8 +244,8 @@ export class DashboardComponent implements OnInit {
         this.requiredCalorie=requiredCal
       }
       
-      this.reqPro = parseInt(currentWeight)*2.2;
-      this.reqCarb = this.reqPro*2;
+      this.reqPro = (parseInt(currentWeight)*2.2).toFixed(1);
+      this.reqCarb = (this.reqPro*2).toFixed(1);
       this.reqFat = ((parseInt(this.requiredCalorie) - ((this.reqPro*4)+(this.reqCarb*4)))/9).toFixed(1);
     })
     this.generateChart();

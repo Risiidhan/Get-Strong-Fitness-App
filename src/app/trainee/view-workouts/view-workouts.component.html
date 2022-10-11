@@ -10,60 +10,40 @@
                 <div>
 
                     <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
-                        <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
+                        <div class="title font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
                             Workouts
                         </div>
-                        <h2 class="text-blue-400">Begineer</h2>
+                        <h2 class="text-blue-400">{{userName}}'s Workout</h2>
                         <div class="flex flex-row overflow-x-auto flex-nowrap mb-10 pb-3">
-                            <div class="row mr-4" *ngFor="let x of begineerWorkout">
+                            <div class="row mr-4" *ngFor="let x of userWorkout; let i=index">
                                 <div class="border-2 border-black bg-white rounded-2xl mb-2 px-12 py-8 md:ml-6">
-                                    <h5 class="mb-2 text-xl font-thin ">{{x.category}}</h5>
+                                    <h5 class="mb-2 text-xl font-thin "></h5>
                                     <h5 class="mb-4 editFont text-2xl text-blue-600 font-semibold">Muscle Group: {{x.targetMuscle}}</h5>
-                                    <span class="text-3xl mb-4 mb-3 text-gray-500 dark:text-gray-400 font-semibold">{{x.title}}</span>
+                                    <span class="text-3xl mb-4 mb-3 text-gray-500 dark:text-gray-400 day font-semibold">{{x.day}}</span>
                                     <div *ngFor="let x of x.schedule">
                                         <li class="flex space-x-3 flex-row sm:justify-start md:justify-start my-2">
                                         <!-- Icon -->
                                             <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-blue-600 dark:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                                             <span class="text-base whitespace-nowrap font-normal leading-tight">{{x.exerciseName}} : {{x.setAndReps}}</span>
                                         </li>
-                                    </div>                    
+                                    </div>  
+
+                                    <span  *ngFor="let y of arr;" class="text-base block py-6 whitespace-nowrap font-normal leading-tight"> 
+                                            <span *ngIf="x.day=='Monday'" class="status status[{{i}}]">Status : {{y.Monday}}</span>
+                                            <span *ngIf="x.day=='Tuesday'" class="status status[{{i}}]">Status : {{y.Tuesday}}</span>
+                                            <span *ngIf="x.day=='Wednesday'" class="status status[{{i}}]">Status : {{y.Wednesday}}</span>
+                                            <span *ngIf="x.day=='Thursday'" class="status status[{{i}}]">Status : {{y.Thursday}}</span>
+                                            <span *ngIf="x.day=='Friday'" class="status status[{{i}}]">Status : {{y.Friday}}</span>
+
+                                    </span>
+
+                                    <button (click)="complete(i)" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Finished</button>
+                                    <button (click)="inComplete(i)" type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Nope</button>
+                
                                 </div>
                             </div>
-                        </div>
-                        <h2 class="text-blue-400">Intermediate</h2>
-                        <div class="flex flex-row overflow-x-auto flex-nowrap mb-10 pb-3">
-                            <div class="row mr-4" *ngFor="let x of intermediateWorkout">
-                                <div class="border-2 border-black bg-white rounded-2xl mb-2 px-12 py-8 md:ml-6">
-                                    <h5 class="mb-2 text-xl font-thin ">{{x.category}}</h5>
-                                    <h5 class="mb-4 editFont text-2xl text-blue-600 font-semibold">Muscle Group: {{x.targetMuscle}}</h5>
-                                    <span class="text-3xl mb-4 mb-3 text-gray-500 dark:text-gray-400 font-semibold">{{x.title}}</span>
-                                    <div *ngFor="let x of x.schedule">
-                                        <li class="flex space-x-3 flex-row sm:justify-start md:justify-start my-2">
-                                        <!-- Icon -->
-                                            <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-blue-600 dark:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                            <span class="text-base whitespace-nowrap font-normal leading-tight">{{x.exerciseName}} : {{x.setAndReps}}</span>
-                                        </li>
-                                    </div>                    
-                                </div>
-                            </div>
-                        </div>
-                        <h2 class="text-blue-400">Advanced</h2>
-                        <div class="flex flex-row overflow-x-auto flex-nowrap mb-10 pb-3">
-                            <div class="row mr-4" *ngFor="let x of advancedWorkout">
-                                <div class="border-2 border-black bg-white rounded-2xl mb-2 px-12 py-8 md:ml-6">
-                                    <h5 class="mb-2 text-xl font-thin ">{{x.category}}</h5>
-                                    <h5 class="mb-4 editFont text-2xl text-blue-600 font-semibold">Muscle Group: {{x.targetMuscle}}</h5>
-                                    <span class="text-3xl mb-4 mb-3 text-gray-500 dark:text-gray-400 font-semibold">{{x.title}}</span>
-                                    <div *ngFor="let x of x.schedule">
-                                        <li class="flex space-x-3 flex-row sm:justify-start md:justify-start my-2">
-                                        <!-- Icon -->
-                                            <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-blue-600 dark:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                            <span class="text-base whitespace-nowrap font-normal leading-tight">{{x.exerciseName}} : {{x.setAndReps}}</span>
-                                        </li>
-                                    </div>                    
-                                </div>
-                            </div>
-                        </div>
+                        </div>  
+                        <button (click)="onSubmit()" type="button" id="finalBtn" class="disabled:opacity-50 disabled:cursor-not-allowed text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Complete Workout For The Week</button>          
                     </div>
                 </div>
 

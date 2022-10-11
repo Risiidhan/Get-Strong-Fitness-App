@@ -38,6 +38,7 @@ import { ForgotPasswordComponent } from './modals/forgot-password/forgot-passwor
 import { ChatComponent } from './chat/chat.component';
 import { MessageComponent } from './instructor/message/message.component';
 import { ReportsComponent } from './admin/reports/reports.component';
+import { WorkoutReportComponent } from './trainee/workout-report/workout-report.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ReportsComponent } from './admin/reports/reports.component';
     ForgotPasswordComponent,
     ChatComponent,
     MessageComponent,
-    ReportsComponent
+    ReportsComponent,
+    WorkoutReportComponent
   ],
   imports: [
     BrowserModule,

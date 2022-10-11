@@ -31,8 +31,9 @@ export class AuthService {
   register(email:string, password: string, username:string){
     this.auth.createUserWithEmailAndPassword(email,password)
       .then( 
-        ()=>{
+        (res)=>{
           this.messService.messageBox('Registered')
+          this.sendEmailVerification(res.user);
         },err=>{
 
           let code = `(${err.code})`
@@ -45,6 +46,14 @@ export class AuthService {
       )
   }
 
+
+  sendEmailVerification(user:any){
+    user.sendEmailVerification().then((res:any) =>{
+
+    }, (err:any)=>{
+      this.errMess.messageBox(err.Message)
+    })
+  }
 
 
   //login method

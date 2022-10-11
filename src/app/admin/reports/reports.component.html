@@ -10,6 +10,7 @@
     <div>
 
         <div class="border-2 border-gray-200 font-medium mb-10 bg-white rounded-2xl w-full px-6 py-4 text-gray-800">
+            <div id="customerReport">
             <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
                 Customer Reports
                 <input (change)="onChangeCustomer($event.target)" type="date" class="border-none">
@@ -54,6 +55,16 @@
                         </table>
                     </div>
 
+                </div>
+                    <button (click)="download('customerReport')" type="button" class="but text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0z"/>
+                        </svg>
+                            <span class="pl-3">Download</span> 
+                    </button> 
+
+            <div id="instReport">
+
                     <div class="font-medium mb-10 bg-white rounded-2xl w-full py-4 flex items-center text-2xl text-gray-800 justify-between ">
                         Instructor Reports
                         <input (change)="onChangeInstructor($event.target)" type="date" class="border-none">
@@ -97,7 +108,13 @@
                                     </tbody>
                                 </table>
                             </div>
-                    
+                    </div>
+                    <button (click)="download('instReport')" type="button" class=" but text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0z"/>
+                        </svg>
+                            <span class="pl-3">Download</span> 
+                    </button> 
                 </div>                
             </div>
 

@@ -30,9 +30,9 @@
 
                 <div class="row mr-4" *ngFor="let x of workout">
                     <div class="border-2 border-black bg-white rounded-2xl mb-2 px-12 py-8 md:ml-6">
-                        <h5 class="mb-2 text-xl font-thin ">{{x.category}}</h5>
+                        <h5 class="mb-2 text-xl font-thin ">{{x.username}}</h5>
                         <h5 class="mb-4 editFont text-2xl text-blue-600 font-semibold">Muscle Group: {{x.targetMuscle}}</h5>
-                        <span class="text-3xl mb-4 mb-3 text-gray-500 dark:text-gray-400 font-semibold">{{x.title}}</span>
+                        <span class="text-3xl mb-4 mb-3 text-gray-500 dark:text-gray-400 font-semibold">{{x.day}}</span>
                         <div *ngFor="let x of x.schedule">
                             <li class="flex space-x-3 flex-row sm:justify-start md:justify-start my-2">
                             <!-- Icon -->
@@ -53,12 +53,20 @@
                         Edit Workout
                     </div>
                     <div class="mb-6">
-                        <label for="title" class="block mb-2 text-sm font-medium">Title </label>
-                        <input required id="title" type="text" formControlName="title" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
-                    </div> 
+                        <label for="day" class="block mb-2 text-sm font-medium">Day</label>
+                        <select required id="day" type="text" formControlName="day" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                            <option class="w-fit">Monday</option>
+                            <option>Tuesday</option>
+                            <option>Wednesday</option>
+                            <option>Thursday</option>
+                            <option>Friday</option>
+
+                          </select>
+
+                      </div>
                     <div class="mb-6">
-                        <label for="category" class="block mb-2 text-sm font-medium">Category </label>
-                        <input required id="category" type="text" formControlName="category" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
+                        <label for="username" class="block mb-2 text-sm font-medium">Username </label>
+                        <input required id="username" type="text" formControlName="username" class="block text-gray-500 p-2.5 w-full rounded-lg border border-gray-300 sm:text-md">
                     </div> 
                     <div class="mb-6">
                         <label for="targetMuscle" class="block mb-2 text-sm font-medium">TargetMuscle </label>

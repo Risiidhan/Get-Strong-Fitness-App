@@ -20,14 +20,15 @@ export class EditWorkoutsComponent implements OnInit {
     private errorMessService:ErrorMessageService) { }
 
   workout:any = []
+  trainee:any;
 
   searchWorkoutForm = new FormGroup({
     workoutName: new FormControl(''),
   });
 
   editWorkoutForm = this.fb.group({
-    title: ['',Validators.required],
-    category: ['',Validators.required],
+    day: ['',Validators.required],
+    username: ['',Validators.required],
     targetMuscle: ['',Validators.required],
     shedule: this.fb.array([
       this.exFormGroup()
@@ -60,28 +61,45 @@ export class EditWorkoutsComponent implements OnInit {
 
 
   onSubmit(form:any) {
+    this.trainee = form.username;
     const db = getDatabase();
     const dbRef = ref(db)
-    get(child(dbRef,'workout/' + form.title))
+    get(child(dbRef,'workout/' + form.username+' '+form.day))
       .then((snapshot)=>{
         if(snapshot.val()) return this.errorMessService.messageBox('This workout already exists')
         
-          set(ref(db, 'workout/' + form.title), {
-            title: form.title,
-            category:form.category,
+          set(ref(db, 'workout/' + form.username+' '+form.day), {
+            day: form.day,
+            username:form.username,
             targetMuscle:form.targetMuscle,
             schedule:form.shedule
+
           });
         this.getAllWorkout()
         this.messService.messageBox('Inserted');
+        this.addReport();
       })
+  }
+
+  addReport(){
+    let arr = [      {
+      Monday:'Pending',
+      Tuesday:'Pending',
+      Wednesday:'Pending',
+      Thursday:'Pending',
+      Friday:'Pending'
+    }]
+    const db = getDatabase();
+    set(ref(db, 'workoutReport/' + this.trainee), {
+      week:arr
+    });  
   }
 
   updateTip(form:any){
     const db = getDatabase();
-    update(ref(db, 'workout/' + form.title), {
-      title: form.title,
-      category:form.category,
+    update(ref(db, 'workout/' + form.username+' '+form.day), {
+      day: form.day,
+      username:form.username,
       targetMuscle:form.targetMuscle,
       schedule:form.shedule
     });
