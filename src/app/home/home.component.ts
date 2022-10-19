@@ -12,8 +12,10 @@ export class HomeComponent implements OnInit {
   constructor(public dialog:MatDialog) { }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
+
+
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginModalComponent, {
       panelClass: 'app-full-bleed-dialog',

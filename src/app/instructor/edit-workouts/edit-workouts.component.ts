@@ -140,8 +140,6 @@ export class EditWorkoutsComponent implements OnInit {
       onlyOnce: true
     });    
   }
-  
 
-  
 
 }

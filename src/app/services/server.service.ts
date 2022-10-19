@@ -45,6 +45,14 @@ export class ServerService {
 
 
   updateCustomer(form:any){
+    
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0'
+    var yyyy = today.getFullYear();
+
+    let date = mm + '/' + dd + '/' + yyyy;
+
     update(ref(this.db, 'trainees/' + form.username), {
       name: form.fullName,
       age : form.age,
@@ -53,7 +61,10 @@ export class ServerService {
       contact: form.contact,
       weight: form.weight,
       height: form.height,
-      exerciseLevel: form.exerciseLevel
+      exerciseLevel: form.exerciseLevel,
+      lastPayment : date,
+      paidDate : date
+
     });
   }
 

@@ -14,7 +14,9 @@ export class InstructorDashboardComponent implements OnInit {
   constructor(private logService:LoginService) { }
 
   workout:any = []
-
+  totalRecipe=0;
+  totalTipCount=0;
+  workoutCount=0;
   tips:any = [];
 
 
@@ -25,6 +27,46 @@ export class InstructorDashboardComponent implements OnInit {
     this.username = localStorage.getItem('token')
     this.getAllTips()
     this.getAllWorkout();
+    this.getTipCount();
+    this.getRecipeCount();
+    this.getWorkoutCount();
+  }
+
+  getTipCount(){
+    const db = getDatabase();
+    const dbRef = ref(db, 'tip/');
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        this.totalTipCount++       
+      });
+    }, {
+      onlyOnce: true
+    });
+  }
+
+  getWorkoutCount(){
+    const db = getDatabase();
+    const dbRef = ref(db, 'workout/');
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        this.workoutCount++       
+      });
+    }, {
+      onlyOnce: true
+    });
+  }
+
+  getRecipeCount(){ 
+    const db = getDatabase();
+    const dbRef = ref(db, 'food/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        this.totalRecipe++       
+      });
+    }, {
+      onlyOnce: true
+    });
   }
 
   getAllTips(){

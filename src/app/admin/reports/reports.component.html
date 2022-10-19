@@ -24,13 +24,16 @@
                                         Full Name
                                     </th>
                                     <th scope="col" class="py-3 px-6">
-                                        Address
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">
                                         Contact
                                     </th>
                                     <th scope="col" class="py-3 px-6">
                                         Join Date
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Paid Till
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Last Payment Date
                                     </th>
                                 </tr>
                             </thead>
@@ -41,14 +44,16 @@
                                     </td>
                                   
                                     <td class="py-4 px-6">
-                                        {{cus.address}}
-                                    </td>
-                                    
-                                    <td class="py-4 px-6">
                                         {{cus.contact}}
                                     </td>
                                     <td class="py-4 px-6">
                                         {{cus.joinDate}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.lastPayment}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{cus.paidDate}}
                                     </td>
                                 </tr>
                             </tbody>

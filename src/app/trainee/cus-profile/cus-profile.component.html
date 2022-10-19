@@ -76,6 +76,12 @@
                                       <p *ngIf="(!exerciseLevel.untouched || profileForm.submitted)&& exerciseLevel.errors?.required" class="mt-2 text-sm text-red-600 dark:text-red-500">Please select the exercise level</p>
     
                                   </div>
+
+                                  <div class="mb-6">
+                                
+                                    <label for="height" class="block mb-2 text-sm font-medium">Paid Till</label>
+                                    <label for="height" [(ngModel)]="data[0].age" class="block mb-2 text-sm font-medium"></label>
+                                 </div>
                      
                           
                           

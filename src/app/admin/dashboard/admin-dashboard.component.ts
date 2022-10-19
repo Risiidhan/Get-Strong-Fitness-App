@@ -76,7 +76,6 @@ export class AdminDashboardComponent implements OnInit {
       snapshot.forEach((childSnapshot) => {
         this.InstructorsCount++       
       });
-      console.log(this.InstructorsCount);
     }, {
       onlyOnce: true
     });

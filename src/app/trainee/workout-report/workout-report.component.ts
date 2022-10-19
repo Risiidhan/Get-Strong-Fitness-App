@@ -29,7 +29,7 @@ export class WorkoutReportComponent implements OnInit {
     this.data = document.getElementById('workoutReport');  //Id of the table
     html2canvas(this.data).then(canvas => {  
       // Few necessary setting options  
-      let imgWidth = 208;   
+      let imgWidth = 208;
       let pageHeight = 295;    
       let imgHeight = canvas.height * imgWidth / canvas.width;  
       let heightLeft = imgHeight;  

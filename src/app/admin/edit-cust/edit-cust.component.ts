@@ -66,7 +66,9 @@ export class EditCustComponent implements OnInit {
         weight: form.weight,
         height: form.height,
         joinDate: date,
-        exerciseLevel: form.exerciseLevel
+        exerciseLevel: form.exerciseLevel,
+        lastPayment : date,
+        paidDate : date
     });
   })
  

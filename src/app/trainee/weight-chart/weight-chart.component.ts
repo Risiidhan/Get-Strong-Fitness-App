@@ -90,14 +90,15 @@ export class WeightChartComponent implements OnInit {
     var today = new Date();
     var day = (today.getMonth()+1)+'/'+today.getDate()+'/';
 
-    if(!this.lineChart.data.labels.includes(day)||!this.lineChart.data.labels.includes(day.toString())){ 
+    if(this.lineChart.data.labels.includes(day)||!this.lineChart.data.labels.includes(day.toString())){ 
+      this.errorMess.messageBox('Your Weight for today has been already added')
+      return
+    }
+    else{
       this.lineChart.data.datasets[0].data.push(this.addedWeight);
       this.lineChart.data.labels.push(day);
       this.lineChart.update();
       this.addUserWeighttToDb(this.addedWeight,day)
-    }
-    else{
-      this.errorMess.messageBox('Your Weight for today has been already added')
     }
   }
 
@@ -115,6 +116,7 @@ export class WeightChartComponent implements OnInit {
       });
    
   }
+  
 
 
 }
