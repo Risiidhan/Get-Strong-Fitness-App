@@ -71,7 +71,7 @@ export class AuthService {
   
           get(q)
           .then((snapshot)=>{
-            if(!snapshot.val()) return alert('No such email registered under trainees')
+            if(!snapshot.val()) return this.errMess.messageBox('No such email registered under trainees')
             snapshot.forEach(childSnapshot => {
               this.userDetails = childSnapshot.val()
               localStorage.setItem('token',this.userDetails.username);  
@@ -89,7 +89,7 @@ export class AuthService {
   
           get(q)
           .then((snapshot)=>{
-            if(!snapshot.val()) return alert('No such email registered under admin')
+            if(!snapshot.val()) return this.errMess.messageBox('No such email registered under admin')
             snapshot.forEach(childSnapshot => {
               this.userDetails = childSnapshot.val()
               localStorage.setItem('token',this.userDetails.username);  
@@ -108,7 +108,7 @@ export class AuthService {
   
           get(q)
           .then((snapshot)=>{
-            if(!snapshot.val()) return alert('No such email registered under instructor')
+            if(!snapshot.val()) return this.errMess.messageBox('No such email registered under instructor')
             snapshot.forEach(childSnapshot => {
               this.userDetails = childSnapshot.val()
               localStorage.setItem('token',this.userDetails.username);  

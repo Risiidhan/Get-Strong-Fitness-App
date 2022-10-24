@@ -46,17 +46,17 @@ export class SidemenuComponent implements OnInit {
         'pk_test_51LrwlGHRCYk0ZxOUfoFhm4MUvTclK8XUGQTF34f5C9r8PKZR2DKgvtQuHyQAYe1UA0CwJzvxZMnvwRI9A0jBKZBE00xwpg2pO8',
 
       locale: 'auto',
-      token: function (stripeToken: any) {
-        console.log(stripeToken.card);
-      },
-    });
+      token: (stripeToken: any)=> {
+        this.payment()
+        // console.log(stripeToken.card);
+      }});
 
     paymentHandler.open({
       name: 'LifeLine Fitness Gym',
       description: 'Make Your Monthly Payment',
       amount: 720,
     });
-    this.payment(); 
+    
 
   }
 
