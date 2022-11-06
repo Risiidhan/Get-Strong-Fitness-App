@@ -35,10 +35,13 @@
                                     <th scope="col" class="py-3 px-6">
                                         Last Payment Date
                                     </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        OutStanding
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let cus of customer" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <tr *ngFor="let cus of customer; let i=index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="py-4 px-6">
                                         {{cus?.name}}
                                     </td>
@@ -54,6 +57,9 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         {{cus.paidDate}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        Rs. {{outstanding[i]}}
                                     </td>
                                 </tr>
                             </tbody>

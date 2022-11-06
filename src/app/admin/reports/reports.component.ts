@@ -21,15 +21,95 @@ export class ReportsComponent implements OnInit {
   instructors:any=[];
   pipe = new DatePipe('en-US');
   data:any='';
+  newCust:any='';
+  outstanding:any='';
+  lDate:any;
+  tDate:any;
 
 
   ngOnInit(): void {
     this.getAllData();
   }
 
+  
+
   getAllData(){
     this.customer=[];
-    this.server.getAllCustomer(this.customer);
+    const db = getDatabase();
+    const dbRef = ref(db, 'trainees/');
+    
+    onValue(dbRef, (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        this.customer.push(childSnapshot.val());  
+      });
+      for(let i=0;i<this.customer.length;i++){
+        this.newCust+=(this.customer[i].lastPayment)+',';
+      }
+      this.newCust=this.newCust.split(',')
+
+      for(let i=0; i<this.newCust.length;i++){
+        if(this.newCust[i]!=''){
+
+        let lastPay = this.newCust[i];
+          
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+    
+        let date = mm + '/' + dd + '/' + yyyy;
+    
+        let x = lastPay;
+        let y = x.split('/');
+        let year = parseInt(y[2]);
+        let m = parseInt(y[0]);
+        let d = parseInt(y[1]);
+
+        console.log(year,m,d,yyyy,mm,dd);
+        
+        if(year>yyyy){
+          this.outstanding+=0+',';
+        }
+        if(m>parseInt(mm)){
+          this.outstanding+=0+',';
+        }
+        if(year<=yyyy){
+          if(m==parseInt(mm)){
+            if(d<parseInt(dd)){
+              this.lDate = new Date(lastPay);
+              this.tDate = new Date(date);
+              let months=Math.abs(this.tDate-this.lDate);
+              let x = new Date(months); 
+              let month = x.getMonth()+1;
+              this.outstanding+=month*2500+',';  
+            } 
+            else{
+              this.outstanding+=0+',';
+            }
+          }
+          if(m<parseInt(mm)){
+            this.lDate = new Date(lastPay);
+              this.tDate = new Date(date);
+              let months=Math.abs(this.tDate-this.lDate);
+              let x = new Date(months); 
+              let month = x.getMonth()+1;
+              this.outstanding+=month*2500+',';  
+          }
+        }
+      }
+      }
+      this.outstanding=this.outstanding.split(',');
+      console.log(this.outstanding);
+
+    }, {
+      onlyOnce: true
+    });
+    
+
+
+  
+    
 
     this.instructors=[];
     this.server.getAllInstructor(this.instructors);

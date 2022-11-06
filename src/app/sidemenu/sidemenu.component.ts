@@ -113,9 +113,6 @@ export class SidemenuComponent implements OnInit {
 
     let paidTillDate = mm + '/' + dd + '/' + yyyy;
 
-
-
-
     update(ref(db, 'trainees/' + this.userName), {
       lastPayment : paidTillDate,
       paidDate : todayDate
